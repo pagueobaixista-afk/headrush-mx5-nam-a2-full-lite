@@ -79,7 +79,7 @@ Descartado no caminho: reler a pasta sem reiniciar o aplicativo (risco no áudio
 | `firmware/v3` a `v6` | `nam-sync.sh` de cada versão, scripts que montam a imagem (`build_vN.py`) e a checagem do sistema de arquivos |
 | `ferramentas/` | Sincronização de presets pelo PC, via Bridge |
 | `comparacao/` | Comparação com o NeuralAmpModelerCore oficial |
-| `editor/` | Patch sobre o [MX-Edit](https://github.com/TicT4x/MX-Edit) 0.9.5 (TicT4x, MIT): desenha a arte real dos blocos (PNG de `arte/`, mesma regra de nomes do QML do MX5) no lugar dos símbolos |
+| `editor/` | Patch sobre o [MX-Edit](https://github.com/TicT4x/MX-Edit) 0.9.5 (TicT4x, MIT): arte real dos blocos (PNG de `arte/`, mesma regra de nomes do QML do MX5) e conexão confiável (pausa de 0,3 s depois de abrir a porta MIDI: sem ela o 1º ping se perdia 8 de 8 vezes; novas tentativas; procura o MX5 sozinho até achar) |
 | `instalador/` | Instalador para leigos: `instalar.py` aplica `payload/` (arquivos novos, só as linhas alteradas dos scripts da HeadRush e 38 bytes do `/usr/Evil/Evil`) ao firmware oficial; `dev/make_payload.py` gera o `payload/` a partir da v6; `bridge/` são as bibliotecas da MX5 Bridge 0.7 (MIT) |
 
 ## Como montar
