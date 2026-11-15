@@ -1,0 +1,14 @@
+[OK] E1 base = Update.img da v5 (a que esta no aparelho); original com SHA1 oficial db492d4ae9093e6160bb3d7fc05d8342b9006e92
+[OK] E2 nam-sync.sh: script sh, sem CR, termina em nova linha 15291 bytes, sha1 5baaf8a8208b2e8523a479c02e3598c0dc16ab71
+[OK] E3 base: nam-sync.sh existe (v5), executavel, e runevil/mount_usb_img ja o chamam 0o100755
+[OK] E4 script novo aceita os mesmos modos que os chamadores usam 
+[OK] E5 arquivo relido de um sistema de arquivos reaberto: conteudo e permissao conferem 0o100755
+[OK] E6 entre 3534 arquivos, so mudou o nam-sync.sh ['/usr/Evil/Scripts/nam-sync.sh']
+[OK] E7 tamanho da particao inalterado 
+[OK] E8 xz descomprime de volta para o rootfs exato 62766228 bytes
+[OK] E9 FIT final valido; so splash/recoverysplash/rootfs; splashes identicos aos originais 
+[OK] E10 tamanho do Update.img dentro do que a v3 ja gravou com sucesso (+-1%%) 63084111 x 63089251 bytes
+[OK] E11 Update.img gravado e relido do disco: identico; o nam-sync.sh dentro dele confere 902af9debe320fb076d258d0ee1d1f0acd73a89c
+[OK] E12 pacote de restauracao com o SHA1 oficial 
+
+SHA1 Update.img: 902af9debe320fb076d258d0ee1d1f0acd73a89c

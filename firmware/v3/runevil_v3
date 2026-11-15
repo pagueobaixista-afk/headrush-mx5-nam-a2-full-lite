@@ -1,0 +1,147 @@
+#!/bin/sh
+
+log()
+{
+        echo "$2"
+        logger -p user.$1 -t "evil[$$]" -- "$2"
+}
+
+evil_path=/media/az01-internal/Evil
+
+# Clean up a bit
+rm -f /var/lib/systemd/coredump/*
+
+# -------------------------------------------------------------
+
+# Setup USB image 'partition'
+new_usb_flag=$evil_path/new_usb_flag
+if [ ! -e $new_usb_flag ]; then
+	OLD_IMAGE_FOUND=1
+	echo "The new_usb_flag was not found"
+	# First run of 2.1.0
+	rm -f $evil_path/usb.img
+	echo "Removed usb.img"
+fi
+
+log info "Checking USB image ... "
+log info "Creating the usb image..."
+. /usr/Evil/Scripts/create_usb_img
+# Always mounted now
+log info "Mounting the usb image"
+. /usr/Evil/Scripts/mount_usb_img
+
+log info "Checking first start and content ... "
+cont_db_path=/usr/Evil/Content/evil.db
+evil_db_path=$evil_path/evil.db
+cont_ir_path="/usr/Evil/Content/Impulse Responses"
+evil_old_ir_path=$evil_path/Resources/IR
+evil_ir_path="$evil_path/usb_mnt/Impulse Responses"
+ir_version_filename="ir_version.json"
+cont_logo_path=/usr/Evil/Resources/LockScreenLogo.png
+evil_old_logo_path=`[ -e $evil_path/Resources ] && find $evil_path/Resources -maxdepth 1 -name 'LockScreenLogo*' -print`
+evil_logo_path=`[ -e $evil_path/usb_mnt ] && find $evil_path/usb_mnt -maxdepth 1 -name 'LockScreenLogo*' -print`
+
+## mg01 ##
+cont_slv_path=/usr/Evil/Resources/SetlistView
+evil_slv_path=$evil_path/Resources/SetlistView
+
+[ -e $evil_db_path ] && fresh_start=0 || fresh_start=1
+mkdir -p $evil_path/Resources
+
+# Check layout
+if [ ! -e $evil_path/usb_mnt/Blocks ] || [ ! -e $evil_path/usb_mnt/Rigs ] || [ ! -e $evil_path/usb_mnt/Setlists ]; then
+	# Initial setup
+	mkdir -p $evil_path/usb_mnt/Blocks
+	mkdir -p $evil_path/usb_mnt/Rigs
+	mkdir -p $evil_path/usb_mnt/Setlists
+	mkdir -p $evil_path/usb_mnt/Loops
+fi
+
+if [ ! -e $evil_db_path ] && [ -e $cont_db_path ]; then
+	log info "Install default DB"
+	cp $cont_db_path $evil_db_path
+fi
+# See SGEE-2349, SGEE-2351
+if [ "$fresh_start" -eq "1" ] && [ -e "$cont_ir_path" ]; then
+ 	log info "Install IRs (only new)"
+ 	mkdir -p "$evil_ir_path"
+ 	for i in $( ls "$cont_ir_path"/ )
+ 	do
+ 		[ ! -e "$evil_ir_path"/"$i" -a "$i" != $ir_version_filename] && echo "Copy $cont_ir_path/$i -> $evil_ir_path/$i" &&
+ 			cp "$cont_ir_path"/"$i" "$evil_ir_path"/"$i"
+ 	done
+elif [ "$fresh_start" -eq "0" ] && [ ! -e "$evil_ir_path" ] && [ -e $evil_old_ir_path ]; then
+	# Update to 2.1
+	mkdir -p "$evil_ir_path"
+	log info "Move old IRs from $evil_old_ir_path/ to ${evil_ir_path}/"
+	cp -rv $evil_old_ir_path/* "$evil_ir_path"/
+	rm -Rf $evil_old_ir_path
+fi
+
+## mg01 ##
+if [ ! -e $evil_slv_path ] && [ -e "$cont_slv_path" ]; then
+	log info "Install SetlistView configs"
+	mkdir -p "$evil_slv_path"
+	cp -r "$cont_slv_path"/* "$evil_slv_path"/
+fi
+
+if [ "$fresh_start" -eq "1" ] && [ "$evil_logo_path" == "" ] && [ -e $cont_logo_path ]; then
+	log info "Install default LockScreen Logo"
+	cp $cont_logo_path $evil_path/usb_mnt/
+
+elif [ "$fresh_start" -eq "0" ] && [ $OLD_IMAGE_FOUND ] && [ -e $evil_old_logo_path ]; then
+	# Update to 2.1
+	log info "Move LockScreen Logo in position $evil_old_logo_path -> $evil_path/usb_mnt/"
+	mv "$evil_old_logo_path" $evil_path/usb_mnt/
+fi
+
+# Tag the new state
+[ ! -e $new_usb_flag ] && touch $new_usb_flag
+
+#i2s audio irq cpu affinity to cpu 2
+
+echo "1-1" > /proc/irq/27/smp_affinity_list
+echo "1-1" > /proc/irq/28/smp_affinity_list
+
+grep -h irq/.*ffb20000 /proc/*/stat 2>/dev/null | cut -d' ' -f1 | xargs -i chrt -f -p 99 {}
+grep -h irq/.*ff540000 /proc/*/stat 2>/dev/null | cut -d' ' -f1 | xargs -i chrt -f -p 99 {}
+grep -h irq/.*ff580000 /proc/*/stat 2>/dev/null | cut -d' ' -f1 | xargs -i chrt -f -p 80 {}
+
+# Restart the Touch device
+echo 4-0041 > /sys/bus/i2c/drivers/ili2116/unbind
+echo 4-0041 > /sys/bus/i2c/drivers/ili2116/bind
+
+export ASAN_OPTIONS=allocator_may_return_null=1
+
+# Clean up a bit
+rm -f /var/lib/systemd/coredump/*
+
+log info "Checking usb-mux mode..."
+[ `cat /sys/devices/platform/usb-mux/state` == "internal" ] && echo external > /sys/devices/platform/usb-mux/state
+
+if [ -f /usr/Evil/Scripts/dump-log.sh ]; then
+	NAME=/media/az01-internal/Evil/usb_mnt/log_`date +%Y-%m-%d`_`/usr/Evil/Evil -v`
+fi
+
+# NAM: numera modelos novos e sincroniza os presets do Anxiety OD (nao critico)
+[ -x /usr/Evil/Scripts/nam-sync.sh ] && /usr/Evil/Scripts/nam-sync.sh >/tmp/nam_sync.log 2>&1 </dev/null
+
+# MX5 Bridge: USB-MIDI-Dienst und Datenbankdienst (nicht kritisch)
+setsid /usr/Evil/Scripts/mx5bridge-usb.sh daemon >/dev/null 2>&1 </dev/null &
+setsid /usr/Evil/Scripts/mx5bridge-db.sh daemon >/dev/null 2>&1 </dev/null &
+
+log info "Starting application ..."
+/usr/Evil/Scripts/evil &
+
+echo "$!" > /tmp/evil.pid
+
+log info "Evil start done."
+
+
+if [ -f /usr/Evil/Scripts/dump-log.sh ]; then
+	COUNTER=0
+	while [ $COUNTER -lt 9 ]; do
+		COUNTER=$(expr $COUNTER + 1)
+		/usr/Evil/Scripts/dump-log.sh $NAME
+	done
+fi

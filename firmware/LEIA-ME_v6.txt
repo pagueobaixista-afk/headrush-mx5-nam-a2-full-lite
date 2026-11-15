@@ -1,0 +1,42 @@
+MX5 NAM A2 v6 = v5 + correcao: presets novos nao se perdem mais no Sync
+
+COMO USAR
+  Copie o .nam (sem numero) para a pasta NAM do drive do MX5, ejete e toque em Sync.
+  O MX5 numera o arquivo, cria o preset e, se a pasta mudou, reabre o aplicativo sozinho (10-20 s).
+  A mesma sincronizacao roda toda vez que o aparelho liga.
+
+O QUE ELA FAZ (igual a v5)
+  1) RIGS: se um modelo mudar de posicao (ex.: voce apagou um .nam do meio), o Drive do Anxiety OD
+     nos rigs salvos e corrigido para continuar no MESMO modelo. Antes de mexer em rigs o MX5 guarda
+     uma copia do banco em /media/az01-internal/Evil/nam_sync_antes_dos_rigs.db.
+     Se o modelo que um rig usava foi apagado, o rig nao e alterado e sai um aviso (ATENCAO).
+  2) VOLUME: cada preset "NNN - nome" recebe um Level calculado pelo volume que o proprio .nam
+     informa (metadata.loudness), mirando -18 dB. So vale para os presets da lista: rigs ja salvos
+     ficam com o Level que voce deixou. Se voce salvar um preset com outro Level, ele e respeitado.
+     O Level so sobe ate +12 dB: modelos muito baixos ficam no maximo e saem no relatorio.
+  3) DEFEITO: .nam truncado, vazio ou que nao e um modelo vai para NAM\_com_defeito e nao entra na
+     lista. (Um arquivo com JSON valido mas pesos errados ainda pode passar.)
+  4) RELATORIO: quando algo muda, o MX5 escreve NAM\nam_sync_relatorio.txt (leia no PC).
+
+OPCOES (arquivos de texto na pasta NAM)
+  nam_sync.txt         linha "alvo=-24" muda o volume alvo; linha "nivelar=0" volta os Levels para 50
+  nam_restart_off.txt  nao reinicia o aplicativo sozinho (ai e preciso desligar e ligar)
+  nam_sync_off.txt     desliga toda a sincronizacao
+
+CORRECAO DA v6
+  Na v5, ao sair da transferencia USB, os presets dos modelos novos eram gravados e logo apagados:
+  o aplicativo do MX5 regrava o banco a partir da memoria quando termina o proprio Sync. Na v6 o
+  MX5 so numera/valida os arquivos na hora; o banco e atualizado depois que o aplicativo termina
+  (espera o banco ficar 8 s parado) e entao o aplicativo e reiniciado. Demora uns 15 a 25 s.
+
+O QUE NAO MUDA
+  Motor NAM e som identicos aos da v2 usada em show (libnam_hook.so igual). Em relacao a v5, so o
+  arquivo /usr/Evil/Scripts/nam-sync.sh mudou.
+
+INSTALAR:  1_INSTALAR_NAM_A2_v6\FirmwareUpdater.exe  (MX5 em modo de atualizacao)
+VOLTAR:    ..\MX5_NAM_A2_v5 (a que esta no aparelho hoje), ..\MX5_NAM_A2_v2 ou 2_RESTAURAR_ORIGINAL_2.7
+RECUPERACAO: ligar segurando os footswitches 1+2 (2+3 apaga os rigs - nao use).
+
+TESTADO: 12 testes de montagem; e2fsck sem erros; a logica nova rodou ao vivo no MX5 (script
+executado por fora): esperou o banco parar, criou os 26 presets que tinham se perdido, reiniciou o
+aplicativo e os 61 presets continuaram la. NAO TESTADO: o Sync de verdade com esta imagem.

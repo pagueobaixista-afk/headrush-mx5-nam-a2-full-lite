@@ -1,0 +1,51 @@
+#!/bin/sh
+
+. /usr/Evil/Scripts/def_vars
+
+grep -s exfat /media/az01-internal/Evil/new_usb_flag > /dev/null && EXFAT=1
+
+/usr/Evil/Scripts/is_mounted_usb_img && /usr/Evil/Scripts/umount_usb_img
+
+sync
+losetup -a | xargs -i losetup -d $loop_dev
+losetup -o $def_start $loop_dev $img_path
+LOOPDEV_OK=$?
+while [ $LOOPDEV_OK -ne 0 ]; do
+	echo "mount: losetup failed. retrying"
+	sleep 1
+	losetup -o $def_start $loop_dev $img_path
+	LOOPDEV_OK=$?
+done
+echo mount losetup $?
+sync
+echo Checking and fixing $loop_dev
+if [ $EXFAT ]; then
+	fsck.exfat --repair-yes $loop_dev > /dev/null 2>&1
+else
+	fsck.vfat -a $loop_dev > /dev/null 2>&1
+fi
+sync
+
+echo Mounting $loop_dev to $mnt_path
+if [ $EXFAT ]; then
+	mount -o utf8,noatime $loop_dev $mnt_path
+else
+	mount -o utf8=1,noatime $loop_dev $mnt_path
+fi
+
+echo "trying to touch Blocks, Setlists and Rigs"
+mkdir -p $mnt_path/Blocks && touch $mnt_path/Blocks/test && rm $mnt_path/Blocks/test || RWFAIL=1
+mkdir -p $mnt_path/Setlists && touch $mnt_path/Setlists/test && rm $mnt_path/Setlists/test || RWFAIL=1
+mkdir -p $mnt_path/Rigs && touch $mnt_path/Rigs/test && rm $mnt_path/Rigs/test || RWFAIL=1
+if [ $RWFAIL ] && [ $EXFAT ]
+then
+	echo rechecking
+	fsck.exfat --repair-yes $loop_dev && umount $mnt_path && sync && mount -o utf8=1,noatime $loop_dev $mnt_path
+elif [ $RWFAIL ]
+then
+	echo rechecking
+	fsck.vfat -a $loop_dev && umount $mnt_path && sync && mount -o utf8=1,noatime $loop_dev $mnt_path
+fi
+echo mounting finished
+# NAM: ao remontar o drive (partida e saida da transferencia USB) numera modelos e sincroniza presets
+[ -x /usr/Evil/Scripts/nam-sync.sh ] && /usr/Evil/Scripts/nam-sync.sh transfer >>/tmp/nam_sync.log 2>&1 </dev/null
