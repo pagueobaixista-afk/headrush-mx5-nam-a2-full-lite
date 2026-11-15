@@ -108,6 +108,46 @@ def plano(fs, arte):
     return man, files
 
 
+# Recursos Qt do /usr/Evil/Evil da v6 com arte (SHA1 conferido antes): (tabela de nomes, arvore, dados)
+_RCC = ((44006720, 44035336, 25610928), (44021288, 44044000, 30005624), (44024240, 44046096, 36734176))
+
+
+def exporta_arte_editor(evil, pasta):
+    """Copia as imagens 'Pages/ModuleEditors/img/*.png' (pedais, Amp/, Cab/) do programa do MX5
+    para a pasta de arte do MX-Edit, com o nome do bloco/modelo."""
+    import zlib
+    n = 0
+    for ns, tree, data in _RCC:
+        rec = lambda i: evil[tree + 22 * i:tree + 22 * i + 22]
+        def nome(i):
+            off = ns + struct.unpack_from('>I', rec(i), 0)[0]
+            ln = struct.unpack_from('>H', evil, off)[0]
+            return evil[off + 6:off + 6 + 2 * ln].decode('utf-16-be')
+        def anda(i, caminho):
+            nonlocal n
+            fl = struct.unpack_from('>H', rec(i), 4)[0]
+            nm = nome(i) if i else ''
+            p = caminho + '/' + nm if i else ''
+            if fl & 2:
+                c, f = struct.unpack_from('>II', rec(i), 6)
+                for k in range(c):
+                    anda(f + k, p)
+            elif '/ModuleEditors/img/' in p and p.endswith('.png'):
+                off = data + struct.unpack_from('>I', rec(i), 10)[0]
+                d = evil[off + 4:off + 4 + struct.unpack_from('>I', evil, off)[0]]
+                if fl & 1:
+                    d = zlib.decompress(d[4:])
+                if d[:8] != b'\x89PNG\r\n\x1a\n':
+                    raise Falha('imagem invalida: %s' % p)
+                rel = p.split('/ModuleEditors/img/')[1]
+                dest = os.path.join(pasta, *rel.split('/'))
+                os.makedirs(os.path.dirname(dest), exist_ok=True)
+                open(dest, 'wb').write(d)
+                n += 1
+        anda(0, '')
+    return n
+
+
 def monta(raw, arte):
     if not fitpatch.verify(raw):
         raise Falha('o Update.img oficial esta danificado')
@@ -137,7 +177,7 @@ def monta(raw, arte):
     new = fitpatch.replace_image(raw, 'rootfs', xz)
     if not fitpatch.verify(new):
         raise Falha('conferencia da imagem final falhou')
-    return new
+    return new, files
 
 
 def main():
@@ -161,7 +201,11 @@ def main():
             raise Falha('arquivo nao encontrado: %s' % src)
         diga('Abrindo o atualizador oficial ...')
         folder = patcher.unpack(os.path.abspath(src), work)
-        new = monta(open(os.path.join(folder, 'Update.img'), 'rb').read(), arte)
+        new, files = monta(open(os.path.join(folder, 'Update.img'), 'rb').read(), arte)
+        if arte:
+            pasta_arte = os.path.join(BASE, 'MX-Edit', 'arte')
+            n = exporta_arte_editor(files['/usr/Evil/Evil'][0], pasta_arte)
+            diga('Arte do editor: %d imagens em %s' % (n, pasta_arte))
         out = os.path.join(BASE, SAIDA)
         os.makedirs(out, exist_ok=True)
         open(os.path.join(out, 'Update.img'), 'wb').write(new)

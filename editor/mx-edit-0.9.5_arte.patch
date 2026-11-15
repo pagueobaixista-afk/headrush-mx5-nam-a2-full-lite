@@ -1,0 +1,89 @@
+diff --git a/editor/ui.py b/editor/ui.py
+index 46c68dc..a447502 100644
+--- a/editor/ui.py
++++ b/editor/ui.py
+@@ -9,7 +9,7 @@ durch px(). tkinter kann keine geglaetteten Rundungen zeichnen, darum werden
+ abgerundete Flaechen, Kreise und Symbole mit Pillow 4-fach ueberabgetastet
+ gerendert und als Bilder auf Canvas-Flaechen gelegt (Cache in _IMAGES).
+ """
+-import ctypes, sys, time, tkinter as tk
++import ctypes, os, sys, time, tkinter as tk
+ from tkinter import ttk, font as tkfont
+ 
+ try:
+@@ -460,11 +460,74 @@ def pedal_img(w, h):
+     return _image(("pd", w, h), w, h, d)
+ 
+ 
++def _art_dirs():
++    """Pastas onde procurar a arte dos pedais (PNG com o nome do bloco; Amp/ e Cab/ por modelo)."""
++    base = os.path.dirname(os.path.abspath(sys.executable if getattr(sys, "frozen", False) else __file__))
++    cands = [os.environ.get("MX5_ARTE", ""), os.path.join(base, "arte"),
++             os.path.join(os.path.expanduser("~"), "MX5Editor_Arte")]
++    return [d for d in cands if d and os.path.isdir(d)]
++
++
++_ART_DIRS = None
++_ART_CACHE = {}
++
++
++def art_file(name, model=None):
++    """Caminho do PNG da arte para o bloco `name` (e modelo de Amp/Cab), ou None.
++    Mesma regra do QML do MX5: imagem = nome do tipo do bloco sem o ' 2'."""
++    global _ART_DIRS
++    if _ART_DIRS is None:
++        _ART_DIRS = _art_dirs()
++    if not _ART_DIRS or not name:
++        return None
++    key = (name, model)
++    if key in _ART_CACHE:
++        return _ART_CACHE[key]
++    b = base_name(name)
++    cands = []
++    if model and b in ("Amp", "Cab"):
++        cands.append(os.path.join(b, model + ".png"))
++    elif b == "IR":
++        cands.append("IR.png")
++    if not (model and b in ("Amp", "Cab")):
++        cands.append(b + ".png")
++    found = None
++    for d in _ART_DIRS:
++        for c in cands:
++            p = os.path.join(d, c)
++            if os.path.isfile(p):
++                found = p
++                break
++        if found:
++            break
++    _ART_CACHE[key] = found
++    return found
++
++
++def _draw_art(path, dr, W, H):
++    try:
++        part = Image.open(path).convert("RGBA")
++    except OSError:
++        return False
++    box = part.getbbox()
++    if box:
++        part = part.crop(box)
++    k = min(W / part.width, H / part.height)
++    part = part.resize((max(1, int(part.width * k)), max(1, int(part.height * k))), Image.LANCZOS)
++    dr.pic.alpha_composite(part, ((W - part.width) // 2, (H - part.height) // 2))
++    return True
++
++
+ def model_img(name, model=None, w=84, h=59, dim=False, fit=False):
+     """Flaches Modell-Symbol (symbole.py) fuer Block `name` und Amp-/Cab-Modell `model`,
+     Seitenverhaeltnis 10:7; dim = abgeblendet (Block aus). fit=True: das Symbol wird auf
+     seinen sichtbaren Inhalt beschnitten und so gross wie moeglich in w x h eingepasst
+-    (schmale Treter fuellen die Hoehe, breite Amps die Breite) - fuer die Signalkette."""
++    (schmale Treter fuellen die Hoehe, breite Amps die Breite) - fuer die Signalkette.
++    Com a pasta 'arte' (PNG do MX5), mostra a arte real do pedal no lugar do simbolo."""
++    art = art_file(name, model)
++    if art:
++        return _image(("art", art, w, h, dim), w, h, lambda dr, W, H: _draw_art(art, dr, W, H),
++                      alpha=0.4 if dim else None)
+     look = symbole.look_for(base_name(name or ""), model)
+     if not fit:
+         return _image(("md", name, model, w, h, dim), w, h, lambda dr, W, H: symbole.zeichnen(dr, W, H, look),

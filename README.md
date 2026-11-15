@@ -20,6 +20,7 @@ Projeto desenvolvido e compilado com o **Claude Fable 5.2** (Anthropic).
 5. Ligue o MX5 na tomada e no PC pelo USB. No MX5: **Global Settings > … > Firmware Update**.
 6. Abra **`FirmwareUpdater.exe`** dessa pasta e clique em **Instalar NAM A2 v6**. Não desconecte até terminar.
 7. Copie seus `.nam` para a pasta **`NAM`** do drive do MX5, ejete e toque em **Sync**. Os modelos aparecem como presets do pedal Anxiety OD.
+8. Para editar no PC, abra **`MX-Edit\MX-Edit.exe`** (feche antes outro MX-Edit que estiver aberto). O instalador coloca em `MX-Edit\arte` as mesmas imagens de pedal, amplificador e gabinete que o MX5 mostra na tela.
 
 **Para voltar ao original:** grave o atualizador oficial da HeadRush 2.7 do mesmo jeito.
 
@@ -78,6 +79,7 @@ Descartado no caminho: reler a pasta sem reiniciar o aplicativo (risco no áudio
 | `firmware/v3` a `v6` | `nam-sync.sh` de cada versão, scripts que montam a imagem (`build_vN.py`) e a checagem do sistema de arquivos |
 | `ferramentas/` | Sincronização de presets pelo PC, via Bridge |
 | `comparacao/` | Comparação com o NeuralAmpModelerCore oficial |
+| `editor/` | Patch sobre o [MX-Edit](https://github.com/TicT4x/MX-Edit) 0.9.5 (TicT4x, MIT): desenha a arte real dos blocos (PNG de `arte/`, mesma regra de nomes do QML do MX5) no lugar dos símbolos |
 | `instalador/` | Instalador para leigos: `instalar.py` aplica `payload/` (arquivos novos, só as linhas alteradas dos scripts da HeadRush e 38 bytes do `/usr/Evil/Evil`) ao firmware oficial; `dev/make_payload.py` gera o `payload/` a partir da v6; `bridge/` são as bibliotecas da MX5 Bridge 0.7 (MIT) |
 
 ## Como montar
