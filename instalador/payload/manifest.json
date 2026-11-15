@@ -1,0 +1,309 @@
+{
+ "formato": 1,
+ "descricao": "MX5 NAM A2 v6 sobre o firmware oficial HeadRush MX5 2.7",
+ "firmware_oficial_sha1": "82b5639ceaba94d3c07b8880694d5de2e21b9f43",
+ "arquivos": [
+  {
+   "caminho": "/usr/Evil/Assignments/f_midi_Assignments.qml",
+   "modo": 33188,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "799d81cc97b90caaf52abb365b1d9eb574f876c5",
+   "tipo": "novo",
+   "fonte": "files/usr/Evil/Assignments/f_midi_Assignments.qml"
+  },
+  {
+   "caminho": "/usr/Evil/Assignments/f_midi_Device.qml",
+   "modo": 33188,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "1aed1c0d2f654c24c14676f095045b651c185f4e",
+   "tipo": "novo",
+   "fonte": "files/usr/Evil/Assignments/f_midi_Device.qml"
+  },
+  {
+   "caminho": "/usr/Evil/Evil",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "a87a5d084fde8dcc3981fb4a5967559b25b59075",
+   "tipo": "binario",
+   "base_sha1": "b0f459e02f04e376e80acd209526f8e763ea6148",
+   "sha1_sem_arte": "237ba161c31b97ee8da79cba662d349135bda040",
+   "fonte": "evil_core.bin",
+   "arte": "arte_pedais.bin"
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/evil",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "0ac6ce896519665523c3edf73dffae223f1fafcf",
+   "tipo": "edicao",
+   "base_sha1": "63c8f1963295d9cf6d8ef6fe111dfd11c4c0f710",
+   "base_modo": 33261,
+   "linhas": [
+    [
+     "=",
+     10
+    ],
+    [
+     "+",
+     "# --- NAM mod ---\n# Anxiety OD (v1) process() hijack, optionally also Anxiety OD V2's --\n# the only NAM path(s) this build applies. One of each hijacked pedal's\n# knobs (Drive/Tone/Level) now selects/scans .nam model files.\n# (The additive, own-pedal-type design in patch_namloader.py is NOT\n# applied here -- see README.md.)\n# LD_PRELOAD/NAM_HOOK_SLOT_*_ADDR are scoped to the /usr/Evil/Evil exec\n# below via `env`, NOT exported here -- exporting them shell-wide would\n# also preload libnam_preload.so into systemd-inhibit (a separate,\n# dynamically-linked ELF binary launched right below). Its constructor\n# writes to a hardcoded absolute vaddr valid only inside Evil's own\n# non-PIE layout; inside systemd-inhibit's unrelated address space that\n# write hits unmapped memory and segfaults it before it ever forks Evil\n# -- an infinite crash loop, stuck on the splash screen forever.\n# --- end NAM mod ---\n\n"
+    ],
+    [
+     "=",
+     2
+    ],
+    [
+     "-",
+     1
+    ],
+    [
+     "+",
+     "\t### MX5 Bridge: Sicherung zurueckspielen (falls angefordert), Absturzzaehler, Neustart-Marker\n\t/usr/Evil/Scripts/mx5bridge-db.sh prestart\n\tmx5bStart=$(date +%s)\n\t### NAM-Mod (github.com/lolgab/headrush-nam-mod) nur, wenn eingeschaltet\n\tif /usr/Evil/Scripts/mx5bridge-db.sh nam; then\n\t\tsystemd-inhibit --what=handle-power-key env LD_PRELOAD=/usr/Evil/libnam_preload.so NAM_HOOK_SLOT_GONK_ADDR=0x31c3804 /usr/Evil/Evil\n\telse\n\t\tsystemd-inhibit --what=handle-power-key /usr/Evil/Evil\n\tfi\n"
+    ],
+    [
+     "=",
+     1
+    ],
+    [
+     "+",
+     "\t/usr/Evil/Scripts/mx5bridge-db.sh postexit $exitCode $mx5bStart\n\tif [ -e /tmp/mx5bridge/restart ]; then\n\t\trm -f /tmp/mx5bridge/restart\n\t\tsleep 2\n\t\tcontinue\n\tfi\n"
+    ],
+    [
+     "=",
+     54
+    ]
+   ]
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/mount_usb_img",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "a24cccf4c3127225bf8b0276d6798851476a3f41",
+   "tipo": "edicao",
+   "base_sha1": "858ea4f02e9f7b3d7fd94248e94a29bbc539030b",
+   "base_modo": 33261,
+   "linhas": [
+    [
+     "=",
+     49
+    ],
+    [
+     "+",
+     "# NAM: ao remontar o drive (partida e saida da transferencia USB) numera modelos e sincroniza presets\n[ -x /usr/Evil/Scripts/nam-sync.sh ] && /usr/Evil/Scripts/nam-sync.sh transfer >>/tmp/nam_sync.log 2>&1 </dev/null\n"
+    ]
+   ]
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/mx5bridge-db.sh",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "d8cbd807d99e12322ef3d9d8f87345cdb074ed91",
+   "tipo": "novo",
+   "fonte": "files/usr/Evil/Scripts/mx5bridge-db.sh"
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/mx5bridge-diag.sh",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "89dfbeb2e0b61bf5478a0a67eb150730efa55b99",
+   "tipo": "novo",
+   "fonte": "files/usr/Evil/Scripts/mx5bridge-diag.sh"
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/mx5bridge-nam.txt",
+   "modo": 33188,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "0b0702822f7ac2694f57bdad6ba8ec2a4c4dd414",
+   "tipo": "novo",
+   "fonte": "files/usr/Evil/Scripts/mx5bridge-nam.txt"
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/mx5bridge-sqlite3",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "de835699d712c564a69c135e7cbeefa132c5db2d",
+   "tipo": "novo",
+   "fonte": "files/usr/Evil/Scripts/mx5bridge-sqlite3"
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/mx5bridge-usb.sh",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "d76a0d1cfa18684c602fdf49ea7ca8ece6bb40f4",
+   "tipo": "novo",
+   "fonte": "files/usr/Evil/Scripts/mx5bridge-usb.sh"
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/nam-sync.sh",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "5baaf8a8208b2e8523a479c02e3598c0dc16ab71",
+   "tipo": "novo",
+   "fonte": "files/usr/Evil/Scripts/nam-sync.sh"
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/remove-mass-storage.sh",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "1d99e0bcd9e1f7eb821cd25489235b8d4c8e9aae",
+   "tipo": "edicao",
+   "base_sha1": "31ea341458589ba3931a57477b6ba0d520060260",
+   "base_modo": 33261,
+   "linhas": [
+    [
+     "=",
+     16
+    ],
+    [
+     "+",
+     "/usr/Evil/Scripts/mx5bridge-usb.sh evil-end\n"
+    ]
+   ]
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/runevil",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "9ab54fdfef93ffca52eb31a6f4f6803d13c497fe",
+   "tipo": "edicao",
+   "base_sha1": "fae89803fcded349f9a1a24cbd502060f57444ac",
+   "base_modo": 33261,
+   "linhas": [
+    [
+     "=",
+     125
+    ],
+    [
+     "+",
+     "# NAM: numera modelos novos e sincroniza os presets do Anxiety OD (nao critico)\n[ -x /usr/Evil/Scripts/nam-sync.sh ] && /usr/Evil/Scripts/nam-sync.sh boot >>/tmp/nam_sync.log 2>&1 </dev/null\n\n# MX5 Bridge: USB-MIDI-Dienst und Datenbankdienst (nicht kritisch)\nsetsid /usr/Evil/Scripts/mx5bridge-usb.sh daemon >/dev/null 2>&1 </dev/null &\nsetsid /usr/Evil/Scripts/mx5bridge-db.sh daemon >/dev/null 2>&1 </dev/null &\n\n"
+    ],
+    [
+     "=",
+     15
+    ]
+   ]
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/setup-mass-storage.sh",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "3f304b907b901cd4f9485cc073d43371b36908a5",
+   "tipo": "edicao",
+   "base_sha1": "cf83d14b715bb9f63fe3e571e7d7a35f30cdeedd",
+   "base_modo": 33261,
+   "linhas": [
+    [
+     "=",
+     10
+    ],
+    [
+     "+",
+     "\n/usr/Evil/Scripts/mx5bridge-usb.sh evil-begin storage\n"
+    ],
+    [
+     "=",
+     46
+    ]
+   ]
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/usb-otg-audio-start.sh",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "01878675b97e3dd0b06a0d83efc4d43caa3b8d88",
+   "tipo": "edicao",
+   "base_sha1": "5eb2a46f31614b0bc2cf358551575618e4b941ef",
+   "base_modo": 33261,
+   "linhas": [
+    [
+     "=",
+     9
+    ],
+    [
+     "+",
+     "/usr/Evil/Scripts/mx5bridge-usb.sh evil-begin audio\n"
+    ],
+    [
+     "=",
+     39
+    ],
+    [
+     "+",
+     "    ### MX5 Bridge: USB-MIDI-Funktion (nicht kritisch) ###\n    { ( mkdir -p functions/midi.mx5bridge &&\n        echo 1 >functions/midi.mx5bridge/in_ports &&\n        echo 1 >functions/midi.mx5bridge/out_ports &&\n        ln -s functions/midi.mx5bridge configs/c.1 ) ||\n      logger -t mx5bridge \"USB-MIDI-Funktion konnte nicht angelegt werden\"; true; } &&\n"
+    ],
+    [
+     "=",
+     3
+    ]
+   ]
+  },
+  {
+   "caminho": "/usr/Evil/Scripts/usb-otg-audio-stop.sh",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "39893546159ce16a0758e2e290c4e47e15bc76e8",
+   "tipo": "edicao",
+   "base_sha1": "be4d17f4bf8d4770a47e69673e41578f196fdfd2",
+   "base_modo": 33261,
+   "linhas": [
+    [
+     "=",
+     6
+    ],
+    [
+     "+",
+     "    rm /sys/kernel/config/usb_gadget/g1/configs/c.1/midi.mx5bridge 2>/dev/null\n"
+    ],
+    [
+     "=",
+     2
+    ],
+    [
+     "+",
+     "    rmdir /sys/kernel/config/usb_gadget/g1/functions/midi.mx5bridge 2>/dev/null\n"
+    ],
+    [
+     "=",
+     3
+    ],
+    [
+     "+",
+     "/usr/Evil/Scripts/mx5bridge-usb.sh evil-end\n"
+    ]
+   ]
+  },
+  {
+   "caminho": "/usr/Evil/libnam_hook.so",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "3e7ef62d453a915319c1f245be49cce955d0524a",
+   "tipo": "novo",
+   "fonte": "files/usr/Evil/libnam_hook.so"
+  },
+  {
+   "caminho": "/usr/Evil/libnam_preload.so",
+   "modo": 33261,
+   "uid": 0,
+   "gid": 0,
+   "sha1": "b8a5f008c48dc4183b19cc3a061b76541ee2443e",
+   "tipo": "novo",
+   "fonte": "files/usr/Evil/libnam_preload.so"
+  }
+ ]
+}

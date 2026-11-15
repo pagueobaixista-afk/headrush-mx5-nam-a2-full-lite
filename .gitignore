@@ -1,0 +1,9 @@
+arte_pedais.bin
+__pycache__/
+MX5_NAM_A2_*_PRONTO_PARA_GRAVAR/
+HeadRush_*_Updater.zip
+dist/
+build/
+*.spec
+instalador/release/
+instalador/dist/

@@ -4,7 +4,24 @@ Firmware personalizado para o **HeadRush MX5 (2.7)** que roda modelos **NAM (Neu
 
 É um trabalho derivado de [lolgab/headrush-nam-mod](https://github.com/lolgab/headrush-nam-mod) (v0.1.6), com os motores A2 de [tone-3000/embedded](https://github.com/tone-3000/embedded) portados para ARMv7 NEON e a [MX5 Bridge](#fontes-e-créditos) para acesso ao aparelho pelo PC.
 
-> **Aviso.** Firmware não oficial. Gravar firmware modificado é por sua conta e risco e pode anular a garantia. Este repositório **não** contém a imagem de firmware (`Update.img`), o atualizador da HeadRush, artes de terceiros nem modelos `.nam`: só o código, os patches e os scripts de montagem. Tenha sempre o atualizador original 2.7 à mão. Recuperação do MX5: footswitches 1+2 ao ligar (2+3 apaga os rigs).
+Projeto desenvolvido e compilado com o **Claude Fable 5.2** (Anthropic).
+
+> **Aviso.** Firmware não oficial, sem vínculo com a HeadRush/inMusic. Gravar firmware modificado é por sua conta e risco e pode anular a garantia; os autores não se responsabilizam por danos. O repositório e o instalador **não** contêm o firmware nem o atualizador da HeadRush: o instalador parte do atualizador oficial, baixado do site da inMusic na hora. Recuperação do MX5: footswitches 1+2 ao ligar e gravar o atualizador oficial 2.7 (2+3 apaga os rigs).
+
+## Como instalar (passo a passo)
+
+1. Entre em **[Releases](../../releases/latest)** e baixe o arquivo **`MX5_NAM_A2_v6.zip`**.
+2. Clique com o botão direito no zip > **Extrair tudo**.
+3. Na pasta extraída, dê dois cliques em **`Instalar_MX5_NAM_A2_v6.exe`**.
+   - Ele baixa o atualizador oficial da HeadRush 2.7, monta o firmware e confere tudo (uns 2 minutos).
+   - Se o Windows avisar "O Windows protegeu o computador", clique em **Mais informações > Executar assim mesmo** (o programa não tem assinatura digital paga).
+   - Sem internet: arraste o atualizador oficial que você já tem para cima do `.exe`.
+4. Vai aparecer a pasta **`MX5_NAM_A2_v6_PRONTO_PARA_GRAVAR`**.
+5. Ligue o MX5 na tomada e no PC pelo USB. No MX5: **Global Settings > … > Firmware Update**.
+6. Abra **`FirmwareUpdater.exe`** dessa pasta e clique em **Instalar NAM A2 v6**. Não desconecte até terminar.
+7. Copie seus `.nam` para a pasta **`NAM`** do drive do MX5, ejete e toque em **Sync**. Os modelos aparecem como presets do pedal Anxiety OD.
+
+**Para voltar ao original:** grave o atualizador oficial da HeadRush 2.7 do mesmo jeito.
 
 ## O que faz
 
@@ -61,6 +78,7 @@ Descartado no caminho: reler a pasta sem reiniciar o aplicativo (risco no áudio
 | `firmware/v3` a `v6` | `nam-sync.sh` de cada versão, scripts que montam a imagem (`build_vN.py`) e a checagem do sistema de arquivos |
 | `ferramentas/` | Sincronização de presets pelo PC, via Bridge |
 | `comparacao/` | Comparação com o NeuralAmpModelerCore oficial |
+| `instalador/` | Instalador para leigos: `instalar.py` aplica `payload/` (arquivos novos, só as linhas alteradas dos scripts da HeadRush e 38 bytes do `/usr/Evil/Evil`) ao firmware oficial; `dev/make_payload.py` gera o `payload/` a partir da v6; `bridge/` são as bibliotecas da MX5 Bridge 0.7 (MIT) |
 
 ## Como montar
 
@@ -81,7 +99,7 @@ Ambiente usado: WSL Ubuntu 24.04, toolchain Bootlin `arm-buildroot-linux-gnueabi
 - [Eigen](https://eigen.tuxfamily.org) e [nlohmann/json](https://github.com/nlohmann/json), dependências do NAM.
 - Toolchains da [Bootlin](https://toolchains.bootlin.com).
 
-**Arte dos pedais não incluída:** as imagens dos pedais vêm de material da HeadRush (inMusic) e não podem ser redistribuídas aqui.
+**Arte dos pedais:** as imagens dos pedais são material da HeadRush (inMusic), integradas pelo iosumurillo e pelo Forge-Patch. Elas não fazem parte deste repositório: vão à parte, no arquivo `arte_pedais.bin` do zip da Release, só para uso no MX5 do próprio usuário. Sem esse arquivo, o instalador monta o firmware sem a arte. Detentores de direitos que quiserem a remoção podem abrir uma issue; o arquivo é retirado imediatamente.
 
 HeadRush e MX5 são marcas da inMusic; este projeto não tem vínculo com a fabricante.
 

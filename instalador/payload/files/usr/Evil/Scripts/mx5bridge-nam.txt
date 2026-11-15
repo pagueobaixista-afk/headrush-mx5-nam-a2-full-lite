@@ -1,0 +1,3 @@
+nam_mod_ref=unbekannt
+nam_instanzen=2
+startzeile=env LD_PRELOAD=/usr/Evil/libnam_preload.so NAM_HOOK_SLOT_GONK_ADDR=0x31c3804 /usr/Evil/Evil
