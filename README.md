@@ -76,8 +76,12 @@ Ambiente usado: WSL Ubuntu 24.04, toolchain Bootlin `arm-buildroot-linux-gnueabi
 - [tone-3000/embedded](https://github.com/tone-3000/embedded) 2.0.0: motores A2 Lite/Full (MIT).
 - [sdatkinson/NeuralAmpModelerCore](https://github.com/sdatkinson/NeuralAmpModelerCore): implementação de referência do NAM (MIT).
 - MX5 Bridge 0.7 e MX-Edit 0.9.5, de TicT4x: acesso ao aparelho por USB-MIDI e editor de PC (MIT).
+- [SiulGalvan/Forge-Patch](https://github.com/SiulGalvan/Forge-Patch) ("HEADRUSH MX5 Compatibility Layer"): integração NAM + Bridge + arte usada como base de comparação e da imagem com Bridge (GPLv3).
+- [iosumurillo/GIGBOARD_NAM_AMP_PNG](https://github.com/iosumurillo/GIGBOARD_NAM_AMP_PNG): patch de arte dos pedais na tela (GPLv3).
 - [Eigen](https://eigen.tuxfamily.org) e [nlohmann/json](https://github.com/nlohmann/json), dependências do NAM.
 - Toolchains da [Bootlin](https://toolchains.bootlin.com).
+
+**Arte dos pedais não incluída:** as imagens dos pedais vêm de material da HeadRush (inMusic) e não podem ser redistribuídas aqui.
 
 HeadRush e MX5 são marcas da inMusic; este projeto não tem vínculo com a fabricante.
 
