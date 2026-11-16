@@ -8,6 +8,12 @@ Es un trabajo derivado de [lolgab/headrush-nam-mod](https://github.com/lolgab/he
 
 Proyecto desarrollado y compilado con **Claude Fable 5.2** (Anthropic).
 
+![MX-Edit en el PC](docs/mx-edit.png)
+
+<img src="docs/mx5-screen.jpg" alt="Pantalla del MX5" width="520">
+
+*El mismo rig en MX-Edit, en el PC, con la imagen de cada pedal, y en la pantalla del MX5 (con el pedal NAM A2).*
+
 > **Aviso.** Firmware no oficial, sin vínculo con HeadRush/inMusic. Instalar firmware modificado es bajo tu propio riesgo y puede anular la garantía; los autores no se responsabilizan por daños. El repositorio y el instalador **no** contienen el firmware ni el actualizador de HeadRush: el instalador parte del actualizador oficial, descargado del sitio de inMusic en el momento. Recuperación de la MX5: mantener los footswitches 1+2 al encender e instalar el actualizador oficial 2.7 (2+3 borra los rigs).
 
 ## Cómo instalar (paso a paso)
