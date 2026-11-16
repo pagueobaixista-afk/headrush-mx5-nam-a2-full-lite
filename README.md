@@ -1,110 +1,114 @@
 # MX5 NAM A2
 
-Firmware personalizado para o **HeadRush MX5 (2.7)** que roda modelos **NAM (Neural Amp Modeler)**, incluindo os modelos **A2** no tamanho completo, com uma lista de modelos que se mantém sozinha.
+**English** | [Português](README.pt-BR.md) | [Español](README.es.md)
 
-É um trabalho derivado de [lolgab/headrush-nam-mod](https://github.com/lolgab/headrush-nam-mod) (v0.1.6), com os motores A2 de [tone-3000/embedded](https://github.com/tone-3000/embedded) portados para ARMv7 NEON e a [MX5 Bridge](#fontes-e-créditos) para acesso ao aparelho pelo PC.
+Custom firmware for the **HeadRush MX5 (2.7)** that runs **NAM (Neural Amp Modeler)** models, including full-size **A2** models, with a model list that maintains itself.
 
-Projeto desenvolvido e compilado com o **Claude Fable 5.2** (Anthropic).
+It is a derivative of [lolgab/headrush-nam-mod](https://github.com/lolgab/headrush-nam-mod) (v0.1.6), with the A2 engines from [tone-3000/embedded](https://github.com/tone-3000/embedded) ported to ARMv7 NEON, plus the [MX5 Bridge](#sources-and-credits) for accessing the unit from a PC.
 
-> **Aviso.** Firmware não oficial, sem vínculo com a HeadRush/inMusic. Gravar firmware modificado é por sua conta e risco e pode anular a garantia; os autores não se responsabilizam por danos. O repositório e o instalador **não** contêm o firmware nem o atualizador da HeadRush: o instalador parte do atualizador oficial, baixado do site da inMusic na hora. Recuperação do MX5: footswitches 1+2 ao ligar e gravar o atualizador oficial 2.7 (2+3 apaga os rigs).
+Project developed and built with **Claude Fable 5.2** (Anthropic).
 
-## Como instalar (passo a passo)
+> **Disclaimer.** Unofficial firmware, not affiliated with HeadRush/inMusic. Flashing modified firmware is at your own risk and may void your warranty; the authors are not responsible for any damage. This repository and the installer do **not** contain HeadRush firmware or the HeadRush updater: the installer starts from the official updater, downloaded from the inMusic website at install time. MX5 recovery: hold footswitches 1+2 while powering on and flash the official 2.7 updater (2+3 erases your rigs).
 
-1. Entre em **[Releases](../../releases/latest)** e baixe o arquivo **`MX5_NAM_A2_v6.zip`**.
-2. Clique com o botão direito no zip > **Extrair tudo**.
-3. Na pasta extraída, dê dois cliques em **`Instalar_MX5_NAM_A2_v6.exe`**.
-   - Ele baixa o atualizador oficial da HeadRush 2.7, monta o firmware e confere tudo (uns 2 minutos).
-   - Se o Windows avisar "O Windows protegeu o computador", clique em **Mais informações > Executar assim mesmo** (o programa não tem assinatura digital paga).
-   - Sem internet: arraste o atualizador oficial que você já tem para cima do `.exe`.
-4. Vai aparecer a pasta **`MX5_NAM_A2_v6_PRONTO_PARA_GRAVAR`**.
-5. Ligue o MX5 na tomada e no PC pelo USB. No MX5: **Global Settings > … > Firmware Update**.
-6. Abra **`FirmwareUpdater.exe`** dessa pasta e clique em **Instalar NAM A2 v6**. Não desconecte até terminar.
-7. Copie seus `.nam` para a pasta **`NAM`** do drive do MX5, ejete e toque em **Sync**. Os modelos aparecem como presets do pedal Anxiety OD.
-8. Para editar no PC, abra **`MX-Edit\MX-Edit.exe`** (feche antes outro MX-Edit que estiver aberto). O instalador coloca em `MX-Edit\arte` as mesmas imagens de pedal, amplificador e gabinete que o MX5 mostra na tela.
+## How to install (step by step)
 
-**Para voltar ao original:** grave o atualizador oficial da HeadRush 2.7 do mesmo jeito.
+1. Go to **[Releases](../../releases/latest)** and download **`MX5_NAM_A2_v6.zip`**.
+2. Right-click the zip > **Extract All**.
+3. In the extracted folder, double-click **`Instalar_MX5_NAM_A2_v6.exe`**.
+   - It downloads the official HeadRush 2.7 updater, builds the firmware and verifies everything (about 2 minutes).
+   - If Windows shows "Windows protected your PC", click **More info > Run anyway** (the program has no paid code-signing certificate).
+   - No internet: drag the official updater you already have onto the `.exe`.
+4. A folder named **`MX5_NAM_A2_v6_PRONTO_PARA_GRAVAR`** ("ready to flash") will appear.
+5. Plug the MX5 into power and into the PC via USB. On the MX5: **Global Settings > … > Firmware Update**.
+6. Open **`FirmwareUpdater.exe`** from that folder and click **Instalar NAM A2 v6** ("Install"). Do not disconnect until it finishes.
+7. Copy your `.nam` files to the **`NAM`** folder on the MX5 drive, eject, and tap **Sync**. The models show up as presets of the Anxiety OD pedal.
+8. To edit on the PC, open **`MX-Edit\MX-Edit.exe`** (close any other MX-Edit first). The installer puts in `MX-Edit\arte` the same pedal, amp and cabinet images the MX5 shows on its screen.
 
-## O que faz
+**To go back to stock:** flash the official HeadRush 2.7 updater the same way.
 
-- **NAM dentro do pedal Anxiety OD.** O knob Drive escolhe o modelo (posição na pasta `NAM`), Tone é o ganho de entrada e Level o de saída.
-- **A2 Lite e Full pela chave Hi-Lo.** Low = submodelo reduzido (Lite), High = modelo completo (Full). Dá para virar tocando.
-- **Motores A2 mais rápidos.** Os motores `t3k` portados para NEON são escolhidos por medição no próprio aparelho. Medido no MX5: Full de 715 µs para 451 µs por bloco de 48 amostras (1,58×), Lite de 108 para 73 µs. O bloco dura 1000 µs.
-- **Menos carga à toa.** Sinal mono (L igual a R) é processado uma vez só; a contagem de instâncias ativas foi corrigida; as threads de carga de modelo ficam fora do núcleo e da prioridade do áudio.
-- **Lista de modelos como um carregador de IR.** Cada `.nam` vira um preset `NNN - nome` do Anxiety OD.
-- **Sincronização automática** (`nam-sync.sh`), na partida e ao sair da transferência USB (Sync):
-  - numera os `.nam` novos com o próximo número livre, para as posições antigas não mudarem;
-  - valida os arquivos e move os defeituosos para `NAM/_com_defeito`;
-  - cria, atualiza e remove os presets;
-  - corrige o Drive nos rigs salvos se um modelo mudar de posição (com cópia do banco antes);
-  - calcula o Level do preset pelo `metadata.loudness` do modelo (opcional, ver abaixo);
-  - reinicia o aplicativo sozinho quando a lista mudou e grava um relatório em `NAM/nam_sync_relatorio.txt`.
+> The installer and on-device messages are currently in Portuguese.
 
-Arquivos de controle na pasta `NAM`: `nam_config.txt` (`quality=switch|lite|full|auto`), `nam_sync.txt` (`alvo=`, `nivelar=0`), `nam_sync_off.txt`, `nam_restart_off.txt`.
+## What it does
 
-**Sobre o nivelamento de volume:** ele iguala o volume percebido, mas muda o quanto o modelo empurra os blocos seguintes do rig, e alguns acabam saturando. Na prática o Level precisa de ajuste manual por rig; use `nivelar=0` se preferir todos em 50.
+- **NAM inside the Anxiety OD pedal.** The Drive knob picks the model (its position in the `NAM` folder), Tone is input gain and Level is output gain.
+- **A2 Lite and Full via the Hi-Lo switch.** Low = reduced submodel (Lite), High = full model (Full). You can flip it while playing.
+- **Faster A2 engines.** The `t3k` engines ported to NEON are chosen by benchmarking on the unit itself. Measured on the MX5: Full went from 715 µs to 451 µs per 48-sample block (1.58×), Lite from 108 to 73 µs. A block lasts 1000 µs.
+- **Less wasted load.** Mono signal (L equal to R) is processed only once; the active-instance count was fixed; model-loading threads run off the audio core and below audio priority.
+- **Model list like an IR loader.** Each `.nam` becomes an Anxiety OD preset named `NNN - name`.
+- **Automatic sync** (`nam-sync.sh`), at boot and when leaving USB transfer (Sync):
+  - numbers new `.nam` files with the next free number, so existing positions don't change;
+  - validates files and moves broken ones to `NAM/_com_defeito`;
+  - creates, updates and removes presets;
+  - fixes Drive in saved rigs if a model changes position (backing up the database first);
+  - sets the preset Level from the model's `metadata.loudness` (optional, see below);
+  - restarts the app by itself when the list changed and writes a report to `NAM/nam_sync_relatorio.txt`.
 
-## Quão fiel é ao NAM oficial
+Control files in the `NAM` folder: `nam_config.txt` (`quality=switch|lite|full|auto`), `nam_sync.txt` (`alvo=` target level, `nivelar=0` disables leveling), `nam_sync_off.txt`, `nam_restart_off.txt`.
 
-Comparação direta: o mesmo áudio (2 s do sinal de teste do NeuralAmpModelerCore + 10 s de baixo gravado em linha, 48 kHz) passou pelo [NeuralAmpModelerCore](https://github.com/sdatkinson/NeuralAmpModelerCore) oficial compilado no PC e pelo `libnam_hook.so` idêntico ao do aparelho (mesmo SHA1), rodando em `qemu-arm` com as bibliotecas do firmware, motor `t3k-mla`, Tone e Level em 0 dB.
+**About volume leveling:** it evens out perceived loudness, but changes how hard the model drives the following blocks in the rig, and some end up clipping. In practice Level needs manual adjustment per rig; use `nivelar=0` if you prefer all of them at 50.
 
-| Modelo (A2) | High (Full) x oficial | Low (Lite) x oficial |
+## How faithful it is to official NAM
+
+Direct comparison: the same audio (2 s of the NeuralAmpModelerCore test signal + 10 s of DI bass, 48 kHz) was run through the official [NeuralAmpModelerCore](https://github.com/sdatkinson/NeuralAmpModelerCore) built on a PC and through the `libnam_hook.so` identical to the one on the unit (same SHA1), running under `qemu-arm` with the firmware's libraries, `t3k-mla` engine, Tone and Level at 0 dB.
+
+| Model (A2) | High (Full) vs official | Low (Lite) vs official |
 |---|---|---|
-| Tech 21 Sansamp Bass Driver 01 | resíduo -130,5 dB | -24,6 dB |
-| Darkglass Fuzz - OMEGA | -134,1 dB | -26,5 dB |
-| PP-DI-Only | -135,3 dB | -22,7 dB |
-| B7K 6505+ Distorted Bass | -125,8 dB | -16,1 dB |
+| Tech 21 Sansamp Bass Driver 01 | residual -130.5 dB | -24.6 dB |
+| Darkglass Fuzz - OMEGA | -134.1 dB | -26.5 dB |
+| PP-DI-Only | -135.3 dB | -22.7 dB |
+| B7K 6505+ Distorted Bass | -125.8 dB | -16.1 dB |
 
-Resíduo é a energia da diferença em relação ao sinal oficial. Em **Full** não há atraso nem diferença de nível, e o resíduo fica no arredondamento de ponto flutuante de 32 bits: é o mesmo som. Em **Lite** roda o submodelo reduzido que vem dentro do próprio `.nam`, uma rede menor, e a diferença é audível nos modelos de mais ganho.
+Residual is the energy of the difference from the official output. In **Full** there is no delay or level difference, and the residual is at 32-bit floating-point rounding: it is the same sound. **Lite** runs the reduced submodel shipped inside the `.nam` itself, a smaller network, and the difference is audible on higher-gain models.
 
-O que essa medição não cobre: os conversores e o estágio de entrada do MX5, e o que vem antes e depois do NAM no rig. Para refazer: `comparacao/run.sh`.
+What this measurement does not cover: the MX5's converters and input stage, and whatever comes before and after NAM in the rig. To reproduce: `comparacao/run.sh`.
 
-## Caminho até aqui
+## How we got here
 
-1. **Base.** NAM do lolgab (2 instâncias) e a MX5 Bridge 0.7 para usar o MX-Edit no PC. O build do lolgab foi reproduzido byte a byte antes de qualquer mudança.
-2. **v1, motores A2.** Port dos motores A2 Lite/Full de tone-3000/embedded para ARMv7 NEON (variantes `fma` e `mla`), com seleção automática no aparelho e relatório em `/tmp/nam_a2_report.txt`. Testado em qemu-arm e depois medido no MX5.
-3. **v2, usada em show.** Chave Hi-Lo como seletor Lite/Full (byte achado por diferença de memória, `memscan.c` e `hilo_probe.py`), colapso mono, contagem de instâncias, threads de carga fora do áudio, medidor `/tmp/nam_a2_stats.txt`. Um show inteiro sem nenhum estouro de bloco.
-4. **Presets por modelo.** Presets do Anxiety OD gravados no banco SQLite do aparelho pela Bridge (`ferramentas/nam_presets.py`).
-5. **v3.** Sincronização na partida (`nam-sync.sh`, chamado no `runevil`).
-6. **v4.** Sincronização também ao sair da transferência USB (`mount_usb_img`) e reinício automático do aplicativo.
-7. **v5.** Rigs que se corrigem, nivelamento por loudness, descarte de `.nam` com defeito, relatório.
-8. **v6.** Correção: o aplicativo regrava o banco a partir da memória ao terminar o próprio Sync e apagava os presets recém-criados. Agora o banco só é alterado depois que o aplicativo termina (modo `deferred`), e então ele é reiniciado.
+1. **Base.** lolgab's NAM (2 instances) and MX5 Bridge 0.7 to use MX-Edit on the PC. lolgab's build was reproduced byte for byte before any change.
+2. **v1, A2 engines.** Port of the A2 Lite/Full engines from tone-3000/embedded to ARMv7 NEON (`fma` and `mla` variants), with automatic selection on the unit and a report at `/tmp/nam_a2_report.txt`. Tested in qemu-arm and then measured on the MX5.
+3. **v2, used live.** Hi-Lo switch as the Lite/Full selector (byte found by memory diffing, `memscan.c` and `hilo_probe.py`), mono collapse, instance count, loading threads off the audio path, `/tmp/nam_a2_stats.txt` meter. A whole show without a single block overrun.
+4. **Per-model presets.** Anxiety OD presets written to the unit's SQLite database via the Bridge (`ferramentas/nam_presets.py`).
+5. **v3.** Sync at boot (`nam-sync.sh`, called from `runevil`).
+6. **v4.** Sync also when leaving USB transfer (`mount_usb_img`) and automatic app restart.
+7. **v5.** Self-fixing rigs, loudness leveling, discarding broken `.nam` files, report.
+8. **v6.** Fix: when finishing its own Sync, the app rewrote the database from memory and wiped the freshly created presets. Now the database is only changed after the app finishes (`deferred` mode), and then the app is restarted.
 
-Descartado no caminho: reler a pasta sem reiniciar o aplicativo (risco no áudio) e trocar o Anxiety OD por outro pedal.
+Dropped along the way: rescanning the folder without restarting the app (risk to audio) and replacing the Anxiety OD with another pedal.
 
-## Estrutura
+## Layout
 
-| Pasta | Conteúdo |
+| Folder | Contents |
 |---|---|
-| `motor/` | Patches sobre o lolgab (`nam_hook.diff`, `model_cpp.diff`), motores (`t3k_a2.cpp`, `nam_armv7_neon.h`), scripts de build e teste numerados, `harness.c`, cliente da Bridge (`brq.py`) |
-| `firmware/v3` a `v6` | `nam-sync.sh` de cada versão, scripts que montam a imagem (`build_vN.py`) e a checagem do sistema de arquivos |
-| `ferramentas/` | Sincronização de presets pelo PC, via Bridge |
-| `comparacao/` | Comparação com o NeuralAmpModelerCore oficial |
-| `editor/` | Patch sobre o [MX-Edit](https://github.com/TicT4x/MX-Edit) 0.9.5 (TicT4x, MIT): arte real dos blocos (PNG de `arte/`, mesma regra de nomes do QML do MX5) e conexão confiável (pausa de 0,3 s depois de abrir a porta MIDI: sem ela o 1º ping se perdia 8 de 8 vezes; novas tentativas; procura o MX5 sozinho até achar) |
-| `instalador/` | Instalador para leigos: `instalar.py` aplica `payload/` (arquivos novos, só as linhas alteradas dos scripts da HeadRush e 38 bytes do `/usr/Evil/Evil`) ao firmware oficial; `dev/make_payload.py` gera o `payload/` a partir da v6; `bridge/` são as bibliotecas da MX5 Bridge 0.7 (MIT) |
+| `motor/` | Patches on top of lolgab (`nam_hook.diff`, `model_cpp.diff`), engines (`t3k_a2.cpp`, `nam_armv7_neon.h`), numbered build and test scripts, `harness.c`, Bridge client (`brq.py`) |
+| `firmware/v3` to `v6` | `nam-sync.sh` for each version, scripts that build the image (`build_vN.py`) and the filesystem check |
+| `ferramentas/` | Preset sync from the PC, via Bridge |
+| `comparacao/` | Comparison against the official NeuralAmpModelerCore |
+| `editor/` | Patch on [MX-Edit](https://github.com/TicT4x/MX-Edit) 0.9.5 (TicT4x, MIT): real block artwork (PNGs from `arte/`, same naming rule as the MX5 QML) and reliable connection (0.3 s pause after opening the MIDI port: without it the first ping was lost 8 out of 8 times; retries; keeps searching for the MX5 until found) |
+| `instalador/` | Beginner-friendly installer: `instalar.py` applies `payload/` (new files, only the changed lines of HeadRush scripts, and 38 bytes of `/usr/Evil/Evil`) to the official firmware; `dev/make_payload.py` generates `payload/` from v6; `bridge/` holds the MX5 Bridge 0.7 libraries (MIT) |
 
-## Como montar
+## How to build
 
-Ambiente usado: WSL Ubuntu 24.04, toolchain Bootlin `arm-buildroot-linux-gnueabihf` (glibc 2.31) em `/opt/toolchain`, `qemu-arm`, Python 3.12.
+Environment used: WSL Ubuntu 24.04, Bootlin toolchain `arm-buildroot-linux-gnueabihf` (glibc 2.31) in `/opt/toolchain`, `qemu-arm`, Python 3.12.
 
-1. `motor/01_setup.sh` a `06_build.sh` baixam as fontes, reproduzem o build do lolgab, aplicam os patches e geram o `libnam_hook.so`. `07_test.sh` em diante são os testes.
-2. `motor/build_a2.py` insere o motor numa imagem base já com a Bridge. `firmware/vN/build_vN.py` aplica cada versão sobre a anterior e roda os testes de montagem.
-3. É preciso fornecer por conta própria o `Update.img` 2.7 original e o patcher da MX5 Bridge 0.7. Os scripts trazem caminhos da minha máquina; ajuste-os.
+1. `motor/01_setup.sh` through `06_build.sh` fetch the sources, reproduce lolgab's build, apply the patches and produce `libnam_hook.so`. `07_test.sh` onward are the tests.
+2. `motor/build_a2.py` inserts the engine into a base image that already has the Bridge. `firmware/vN/build_vN.py` applies each version on top of the previous one and runs the build tests.
+3. You must supply the original 2.7 `Update.img` and the MX5 Bridge 0.7 patcher yourself. The scripts contain paths from my machine; adjust them.
 
-## Fontes e créditos
+## Sources and credits
 
-- [lolgab/headrush-nam-mod](https://github.com/lolgab/headrush-nam-mod): o mod de NAM para HeadRush que serve de base (GPLv3).
-- [tone-3000/embedded](https://github.com/tone-3000/embedded) 2.0.0: motores A2 Lite/Full (MIT).
-- [sdatkinson/NeuralAmpModelerCore](https://github.com/sdatkinson/NeuralAmpModelerCore): implementação de referência do NAM (MIT).
-- MX5 Bridge 0.7 e MX-Edit 0.9.5, de TicT4x: acesso ao aparelho por USB-MIDI e editor de PC (MIT).
-- [SiulGalvan/Forge-Patch](https://github.com/SiulGalvan/Forge-Patch) ("HEADRUSH MX5 Compatibility Layer"): pacote que integra NAM, Bridge e arte; foi a base da imagem com Bridge (GPLv3).
-- [iosumurillo/GIGBOARD_NAM_AMP_PNG](https://github.com/iosumurillo/GIGBOARD_NAM_AMP_PNG): patch de arte dos pedais na tela (GPLv3).
-- [Eigen](https://eigen.tuxfamily.org) e [nlohmann/json](https://github.com/nlohmann/json), dependências do NAM.
-- Toolchains da [Bootlin](https://toolchains.bootlin.com).
+- [lolgab/headrush-nam-mod](https://github.com/lolgab/headrush-nam-mod): the HeadRush NAM mod this is based on (GPLv3).
+- [tone-3000/embedded](https://github.com/tone-3000/embedded) 2.0.0: A2 Lite/Full engines (MIT).
+- [sdatkinson/NeuralAmpModelerCore](https://github.com/sdatkinson/NeuralAmpModelerCore): NAM reference implementation (MIT).
+- MX5 Bridge 0.7 and MX-Edit 0.9.5, by TicT4x: USB-MIDI access to the unit and PC editor (MIT).
+- [SiulGalvan/Forge-Patch](https://github.com/SiulGalvan/Forge-Patch) ("HEADRUSH MX5 Compatibility Layer"): package integrating NAM, Bridge and artwork; it was the basis of the image with the Bridge (GPLv3).
+- [iosumurillo/GIGBOARD_NAM_AMP_PNG](https://github.com/iosumurillo/GIGBOARD_NAM_AMP_PNG): on-screen pedal artwork patch (GPLv3).
+- [Eigen](https://eigen.tuxfamily.org) and [nlohmann/json](https://github.com/nlohmann/json), NAM dependencies.
+- Toolchains from [Bootlin](https://toolchains.bootlin.com).
 
-**Arte dos pedais:** as imagens dos pedais são material da HeadRush (inMusic), integradas pelo iosumurillo e pelo Forge-Patch. Elas não fazem parte deste repositório: vão à parte, no arquivo `arte_pedais.bin` do zip da Release, só para uso no MX5 do próprio usuário. Sem esse arquivo, o instalador monta o firmware sem a arte. Detentores de direitos que quiserem a remoção podem abrir uma issue; o arquivo é retirado imediatamente.
+**Pedal artwork:** the pedal images are HeadRush (inMusic) material, integrated by iosumurillo and Forge-Patch. They are not part of this repository: they ship separately, as `arte_pedais.bin` in the Release zip, only for use on the user's own MX5. Without that file, the installer builds the firmware without the artwork. Rights holders who want it removed can open an issue; the file will be taken down immediately.
 
-HeadRush e MX5 são marcas da inMusic; este projeto não tem vínculo com a fabricante.
+HeadRush and MX5 are trademarks of inMusic; this project is not affiliated with the manufacturer.
 
-## Licença
+## License
 
-GPLv3, por derivar do headrush-nam-mod. Ver `LICENSE`.
+GPLv3, as a derivative of headrush-nam-mod. See `LICENSE`.
