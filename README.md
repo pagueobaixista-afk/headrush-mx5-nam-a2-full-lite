@@ -14,6 +14,8 @@ Project developed and built with **Claude Fable 5.2** (Anthropic).
 
 *The same rig in MX-Edit on the PC, with the picture of each pedal, and on the MX5 screen (with the NAM A2 pedal).*
 
+**PC editor:** [HeadRush MX5 PC Editor (MX-Edit fork)](https://github.com/pagueobaixista-afk/MX-Edit) – connects to the MX5 right away on Windows 11 and shows the picture of each pedal. The installer of this project already includes it.
+
 > **Disclaimer.** Unofficial firmware, not affiliated with HeadRush/inMusic. Flashing modified firmware is at your own risk and may void your warranty; the authors are not responsible for any damage. This repository and the installer do **not** contain HeadRush firmware or the HeadRush updater: the installer starts from the official updater, downloaded from the inMusic website at install time. MX5 recovery: hold footswitches 1+2 while powering on and flash the official 2.7 updater (2+3 erases your rigs).
 
 ## How to install (step by step)
