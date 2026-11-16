@@ -1,4 +1,4 @@
-# MX5 NAM A2
+# HeadRush MX5 NAM A2 Full/Lite
 
 [English](README.md) | **Português** | [Español](README.es.md)
 
