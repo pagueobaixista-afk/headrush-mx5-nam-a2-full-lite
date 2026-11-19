@@ -1,0 +1,104 @@
+[OK] T1 base = Update.img da v6; restauracao com SHA1 oficial 902af9debe320fb076d258d0ee1d1f0acd73a89c
+[OK] T2 /usr/Evil/Evil da v6 confere a87a5d084fde8dcc3981fb4a5967559b25b59075
+[OK] T3 tabela de recursos Qt lida 1116 caminhos
+[OK] A1 arte_usada tem exatamente os 248 PNG do firmware (nome por nome) 
+[OK] A2 248 imagens gravadas (CRC de todos os blocos PNG ok, sobra zerada) {'original': 248}
+[OK] A3 releitura: as 248 imagens decodificam do binario 
+[OK] B1 "Anxty OD" aparece uma vez so ['0x1562948']
+[OK] B1 "Anxty OD" -> "NAM A2" cabe (6 de 11) 
+[OK] B1 "Anxty OD" usado por 1 ponteiro (tabela de nomes curtos) ['0x180c14c']
+[OK] B1 "Anx OD 2" aparece uma vez so ['0x1562954']
+[OK] B1 "Anx OD 2" -> "NAM A2 2" cabe (8 de 11) 
+[OK] B1 "Anx OD 2" usado por 1 ponteiro (tabela de nomes curtos) ['0x180c150']
+[OK] C  trecho encontrado 1x: ElevenText { width: 340; height: 50; y: 288; x: 433 1
+[OK] C  trecho encontrado 1x: 					textFormat: Text.PlainText 				}  1
+[OK] C  trecho encontrado 1x: "Mix" : blckEdt.moduleTypeProp.translator.string) 1
+[OK] C  trecho encontrado 1x: text: nameText.replace(" 2", "") 1
+[OK] C  trecho encontrado 1x: id: repPanels  1
+[OK] C  trecho encontrado 1x: width: Evil.isHG04() ? repPanels.panelSizesHG4[index] : repP 1
+[OK] C  trecho encontrado 1x: 				pageListSelector.cppPage.goBackFrom(index); 1
+[OK] C  trecho encontrado 1x: 				pageListSelector.cppPage.itemSelected(index, itemIndex); 1
+[OK] C  trecho encontrado 1x: 	onVisibleChanged: {  1
+[OK] C  bloco comentado de teste removido 
+[OK] C  trecho encontrado 1x: 	property ListSelectorPanelModel itemsModel  1
+[OK] C  trecho encontrado 1x: 		delegate: EvilListButton { 			id: btnListItem  1
+[OK] C  trecho encontrado 1x: 			text: model.name  1
+[OK] C  fim do delegate/ListView/arquivo encontrado 
+[OK] C  trecho encontrado 1x: width: Evil.isHG04() ? 570 : 912; height: Evil.isHG04() ? 28 1
+[OK] C  trecho encontrado 1x: ParameterEdit { width: parent.width; height: parent.height } 1
+[OK] C  trecho encontrado 1x: width: Evil.isHG04() ? 570 : 912; height: Evil.isHG04() ? 28 1
+[OK] C  trecho encontrado 1x: ParameterEdit { width: parent.width; height: parent.height } 1
+[OK] C  trecho encontrado 1x: 	id: editor  1
+[OK] C  trecho encontrado 2x: ParamFader { y: lv.y1; 2
+[OK] C  trecho encontrado 2x: ParamOnOff { y: lv.y1; 2
+[OK] C  trecho encontrado 1x: 	property bool lastof2pages: false  1
+[OK] C  trecho encontrado 1x: 						  else fad.name.toUpperCase() + ": " + fad.valuestring 1
+[OK] C  trecho encontrado 1x: 	property int editIndex  1
+[OK] C  trecho encontrado 1x: 			text: frame.name   1
+[OK] C  trecho encontrado 1x: text: frame.prop && frame.prop.translator && frame.prop.tran 1
+[OK] C  trecho encontrado 1x: text: frame.prop && frame.prop.translator && frame.prop.tran 1
+[OK] C1 /Pages/GlobalSettings.qml: chaves balanceadas 
+[OK] C2 /Pages/GlobalSettings.qml (zlib) cabe 4543 / 4711 bytes
+[OK] C3 /Pages/GlobalSettings.qml descomprime de volta 
+[OK] C1 /Pages/BlockDetails.qml: chaves balanceadas 
+[OK] C2 /Pages/BlockDetails.qml (zlib) cabe 4490 / 4672 bytes
+[OK] C3 /Pages/BlockDetails.qml descomprime de volta 
+[OK] C1 /Pages/ListSelector.qml: chaves balanceadas 
+[OK] C2 /Pages/ListSelector.qml (texto puro) cabe 1851 / 2188 bytes
+[OK] C3 /Pages/ListSelector.qml relido igual 
+[OK] C1 /Controls/ListView/ListSelectorPanel.qml: chaves balanceadas 
+[OK] C2 /Controls/ListView/ListSelectorPanel.qml (texto puro) cabe 3106 / 3116 bytes
+[OK] C3 /Controls/ListView/ListSelectorPanel.qml relido igual 
+[OK] C1 /Pages/ModuleEditors/AnxietyOD.qml: chaves balanceadas 
+[OK] C2 /Pages/ModuleEditors/AnxietyOD.qml (texto puro) cabe 390 / 440 bytes
+[OK] C3 /Pages/ModuleEditors/AnxietyOD.qml relido igual 
+[OK] C1 /Pages/ModuleEditors/AnxietyOD2.qml: chaves balanceadas 
+[OK] C2 /Pages/ModuleEditors/AnxietyOD2.qml (texto puro) cabe 391 / 441 bytes
+[OK] C3 /Pages/ModuleEditors/AnxietyOD2.qml relido igual 
+[OK] C1 /Groups/ParameterEdit.qml: chaves balanceadas 
+[OK] C2 /Groups/ParameterEdit.qml (zlib) cabe 2543 / 2544 bytes
+[OK] C3 /Groups/ParameterEdit.qml descomprime de volta 
+[OK] C1 /Controls/Slider/ParamFader.qml: chaves balanceadas 
+[OK] C2 /Controls/Slider/ParamFader.qml (texto puro) cabe 3249 / 3404 bytes
+[OK] C3 /Controls/Slider/ParamFader.qml relido igual 
+[OK] C1 /Groups/ParamOnOff.qml: chaves balanceadas 
+[OK] C2 /Groups/ParamOnOff.qml (texto puro) cabe 2761 / 2779 bytes
+[OK] C3 /Groups/ParamOnOff.qml relido igual 
+[OK] C4 /Pages/GlobalSettings.qml registrado 1x como pre-compilado 
+[OK] C4 /Pages/GlobalSettings.qml comeca com / 
+[OK] C4 /Pages/BlockDetails.qml registrado 1x como pre-compilado 
+[OK] C4 /Pages/BlockDetails.qml comeca com / 
+[OK] C4 /Pages/ListSelector.qml registrado 1x como pre-compilado 
+[OK] C4 /Pages/ListSelector.qml comeca com / 
+[OK] C4 /Controls/ListView/ListSelectorPanel.qml registrado 1x como pre-compilado 
+[OK] C4 /Controls/ListView/ListSelectorPanel.qml comeca com / 
+[OK] C4 /Pages/ModuleEditors/AnxietyOD.qml registrado 1x como pre-compilado 
+[OK] C4 /Pages/ModuleEditors/AnxietyOD.qml comeca com / 
+[OK] C4 /Pages/ModuleEditors/AnxietyOD2.qml registrado 1x como pre-compilado 
+[OK] C4 /Pages/ModuleEditors/AnxietyOD2.qml comeca com / 
+[OK] C4 /Groups/ParameterEdit.qml registrado 1x como pre-compilado 
+[OK] C4 /Groups/ParameterEdit.qml comeca com / 
+[OK] C4 /Controls/Slider/ParamFader.qml registrado 1x como pre-compilado 
+[OK] C4 /Controls/Slider/ParamFader.qml comeca com / 
+[OK] C4 /Groups/ParamOnOff.qml registrado 1x como pre-compilado 
+[OK] C4 /Groups/ParamOnOff.qml comeca com / 
+[OK] T4 Evil com o mesmo tamanho; todas as mudancas dentro de .rodata (codigo, NAM e cabecalhos intactos) 14559491 bytes alterados entre 1562948 e 2d63fc0
+[OK] T5 slot do NAM na vtable do Anxiety OD igual a v6 
+[OK] D1 arquivo do mesmo tamanho 
+[OK] D1 o arquivo inteiro esta coberto por blocos 
+[OK] D2 Evil relido do sistema de arquivos: conteudo e permissao conferem 0o100755
+[OK] D3 entre 3534 arquivos, so mudou o /usr/Evil/Evil ['/usr/Evil/Evil']
+[OK] D4 tamanho da particao inalterado 
+[OK] D5 xz descomprime de volta para o rootfs exato 52770452 bytes
+[OK] D6 abertura nova: mesmo tamanho cru da original (480x800 BGRA), alfa 255 
+[OK] D6 abertura nova: xz com CRC64 e dicionario de 4 MiB (igual a original) 
+[OK] D7 FIT final valido (hashes); 3 imagens; recoverysplash = original; splash = nova; rootfs = novo 
+[OK] D8 Update.img entre 70% e 102% da v6 (sobras de arte zeradas: 11.6 MB) 53093807 x 63084111 bytes
+[OK] D9 Update.img gravado e relido do disco: identico; o Evil dentro dele confere 78455cdd24059c17887896fe53905ed25b9a7017
+[OK] D10 pacote de restauracao com o SHA1 oficial; pacote de volta = v6 
+
+Pedal reduzido para caber na area: Tri Fuzz.png 197x249 -> 165x209
+Pedais com medidas novas (a tela ajusta): 59 ['8-Bit Crush.png', 'AIR Filter.png', 'AIR Flanger.png', 'AIR Vibrato.png', 'Acoust Sim.png', 'Acoustic Pre.png', 'Ambi Verb.png', 'Anxiety OD V2.png', 'Auto Swell.png', 'B Dist 7000.png', 'B2 Drive.png', 'BBD Delay.png', 'Bass EQ.png', 'Black OP.png', 'Capo.png', 'Chorus.png', 'D1 Dist.png', 'D250 Drive.png', 'DC Distort.png', 'Detune.png', 'Dim Chorus.png', 'Drop Tune.png', 'Env Filter.png', 'FX-Loop.png', 'Flanger.png', 'Gate.png', 'Gray Comp.png', 'Harm.png', 'Hold.png', 'IR.png', 'IR2.png', 'K Drive.png', 'MX Dist.png', 'More Wah.png', 'Multi Chorus.png', 'Noise Filter.png', 'Oct Fuzz.png', 'Octaves Up.png', 'Octaves.png', 'Other.png', 'Party Verb.png', 'Pitch Delay.png', 'Reverse Delay.png', 'Ring Mod.png', 'Rotary.png', 'Round Fuzz.png', 'S1 Drive.png', 'Shimmer.png', 'Side Comp.png', 'Smart Harm.png', 'Spring Reverb.png', 'Stereo Doubler.png', 'Stone Phaser.png', 'Tape Echo.png', 'Time Warp.png', 'Tri Fuzz.png', 'Tron Filter.png', 'Tron Phaser.png', 'White Boost.png']
+
+SHA1 Update.img: 78455cdd24059c17887896fe53905ed25b9a7017
+SHA1 /usr/Evil/Evil: b5b90aa3122d36f7f5082ec01453e95136ca3780

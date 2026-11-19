@@ -1,0 +1,174 @@
+[OK] T1 base = Update.img da v6; restauracao com SHA1 oficial 902af9debe320fb076d258d0ee1d1f0acd73a89c
+[OK] T2 /usr/Evil/Evil da v6 confere a87a5d084fde8dcc3981fb4a5967559b25b59075
+[OK] T3 tabela de recursos Qt lida 1116 caminhos
+[OK] A1 arte_usada tem exatamente os 248 PNG do firmware (nome por nome) 
+[OK] A2 248 imagens gravadas (CRC de todos os blocos PNG ok, sobra zerada) {'original': 248}
+[OK] A3 releitura: as 248 imagens decodificam do binario 
+[OK] B1 "Anxty OD" aparece uma vez so ['0x1562948']
+[OK] B1 "Anxty OD" -> "NAM A2" cabe (6 de 11) 
+[OK] B1 "Anxty OD" usado por 1 ponteiro (tabela de nomes curtos) ['0x180c14c']
+[OK] B1 "Anx OD 2" aparece uma vez so ['0x1562954']
+[OK] B1 "Anx OD 2" -> "NAM A2 2" cabe (8 de 11) 
+[OK] B1 "Anx OD 2" usado por 1 ponteiro (tabela de nomes curtos) ['0x180c150']
+[OK] C  trecho encontrado 1x: ElevenText { width: 340; height: 50; y: 288; x: 433 1
+[OK] C  trecho encontrado 1x: 					textFormat: Text.PlainText 				}  1
+[OK] C  trecho encontrado 1x: "Mix" : blckEdt.moduleTypeProp.translator.string) 1
+[OK] C  trecho encontrado 1x: text: nameText.replace(" 2", "") 1
+[OK] C  trecho encontrado 1x: id: repPanels  1
+[OK] C  trecho encontrado 1x: width: Evil.isHG04() ? repPanels.panelSizesHG4[index] : repP 1
+[OK] C  trecho encontrado 1x: 				pageListSelector.cppPage.goBackFrom(index); 1
+[OK] C  trecho encontrado 1x: 				pageListSelector.cppPage.itemSelected(index, itemIndex); 1
+[OK] C  trecho encontrado 1x: 	onVisibleChanged: {  1
+[OK] C  bloco comentado de teste removido 
+[OK] C  trecho encontrado 1x: 	property ListSelectorPanelModel itemsModel  1
+[OK] C  trecho encontrado 1x: 		delegate: EvilListButton { 			id: btnListItem  1
+[OK] C  trecho encontrado 1x: 			text: model.name  1
+[OK] C  fim do delegate/ListView/arquivo encontrado 
+[OK] C  trecho encontrado 1x: width: Evil.isHG04() ? 570 : 912; height: Evil.isHG04() ? 28 1
+[OK] C  trecho encontrado 1x: ParameterEdit { width: parent.width; height: parent.height } 1
+[OK] C  trecho encontrado 1x: width: Evil.isHG04() ? 570 : 912; height: Evil.isHG04() ? 28 1
+[OK] C  trecho encontrado 1x: ParameterEdit { width: parent.width; height: parent.height } 1
+[OK] C  trecho encontrado 1x: 	id: editor  1
+[OK] C  trecho encontrado 2x: ParamFader { y: lv.y1; 2
+[OK] C  trecho encontrado 2x: ParamOnOff { y: lv.y1; 2
+[OK] C  trecho encontrado 1x: 	property bool lastof2pages: false  1
+[OK] C  trecho encontrado 1x: 						  else fad.name.toUpperCase() + ": " + fad.valuestring 1
+[OK] C  trecho encontrado 1x: 	property int editIndex  1
+[OK] C  trecho encontrado 1x: 			text: frame.name   1
+[OK] C  trecho encontrado 1x: text: frame.prop && frame.prop.translator && frame.prop.tran 1
+[OK] C  trecho encontrado 1x: text: frame.prop && frame.prop.translator && frame.prop.tran 1
+[OK] C1 /Pages/GlobalSettings.qml: chaves balanceadas 
+[OK] C2 /Pages/GlobalSettings.qml (zlib) cabe 4543 / 4711 bytes
+[OK] C3 /Pages/GlobalSettings.qml descomprime de volta 
+[OK] C1 /Pages/BlockDetails.qml: chaves balanceadas 
+[OK] C2 /Pages/BlockDetails.qml (zlib) cabe 4490 / 4672 bytes
+[OK] C3 /Pages/BlockDetails.qml descomprime de volta 
+[OK] C1 /Pages/ListSelector.qml: chaves balanceadas 
+[OK] C2 /Pages/ListSelector.qml (texto puro) cabe 1851 / 2188 bytes
+[OK] C3 /Pages/ListSelector.qml relido igual 
+[OK] C1 /Controls/ListView/ListSelectorPanel.qml: chaves balanceadas 
+[OK] C2 /Controls/ListView/ListSelectorPanel.qml (texto puro) cabe 3106 / 3116 bytes
+[OK] C3 /Controls/ListView/ListSelectorPanel.qml relido igual 
+[OK] C1 /Pages/ModuleEditors/AnxietyOD.qml: chaves balanceadas 
+[OK] C2 /Pages/ModuleEditors/AnxietyOD.qml (texto puro) cabe 390 / 440 bytes
+[OK] C3 /Pages/ModuleEditors/AnxietyOD.qml relido igual 
+[OK] C1 /Pages/ModuleEditors/AnxietyOD2.qml: chaves balanceadas 
+[OK] C2 /Pages/ModuleEditors/AnxietyOD2.qml (texto puro) cabe 391 / 441 bytes
+[OK] C3 /Pages/ModuleEditors/AnxietyOD2.qml relido igual 
+[OK] C1 /Groups/ParameterEdit.qml: chaves balanceadas 
+[OK] C2 /Groups/ParameterEdit.qml (zlib) cabe 2543 / 2544 bytes
+[OK] C3 /Groups/ParameterEdit.qml descomprime de volta 
+[OK] C1 /Controls/Slider/ParamFader.qml: chaves balanceadas 
+[OK] C2 /Controls/Slider/ParamFader.qml (texto puro) cabe 3249 / 3404 bytes
+[OK] C3 /Controls/Slider/ParamFader.qml relido igual 
+[OK] C1 /Groups/ParamOnOff.qml: chaves balanceadas 
+[OK] C2 /Groups/ParamOnOff.qml (texto puro) cabe 2761 / 2779 bytes
+[OK] C3 /Groups/ParamOnOff.qml relido igual 
+[OK] C4 /Pages/GlobalSettings.qml registrado 1x como pre-compilado 
+[OK] C4 /Pages/GlobalSettings.qml comeca com / 
+[OK] C4 /Pages/BlockDetails.qml registrado 1x como pre-compilado 
+[OK] C4 /Pages/BlockDetails.qml comeca com / 
+[OK] C4 /Pages/ListSelector.qml registrado 1x como pre-compilado 
+[OK] C4 /Pages/ListSelector.qml comeca com / 
+[OK] C4 /Controls/ListView/ListSelectorPanel.qml registrado 1x como pre-compilado 
+[OK] C4 /Controls/ListView/ListSelectorPanel.qml comeca com / 
+[OK] C4 /Pages/ModuleEditors/AnxietyOD.qml registrado 1x como pre-compilado 
+[OK] C4 /Pages/ModuleEditors/AnxietyOD.qml comeca com / 
+[OK] C4 /Pages/ModuleEditors/AnxietyOD2.qml registrado 1x como pre-compilado 
+[OK] C4 /Pages/ModuleEditors/AnxietyOD2.qml comeca com / 
+[OK] C4 /Groups/ParameterEdit.qml registrado 1x como pre-compilado 
+[OK] C4 /Groups/ParameterEdit.qml comeca com / 
+[OK] C4 /Controls/Slider/ParamFader.qml registrado 1x como pre-compilado 
+[OK] C4 /Controls/Slider/ParamFader.qml comeca com / 
+[OK] C4 /Groups/ParamOnOff.qml registrado 1x como pre-compilado 
+[OK] C4 /Groups/ParamOnOff.qml comeca com / 
+[OK] T4 Evil com o mesmo tamanho; todas as mudancas dentro de .rodata (codigo, NAM e cabecalhos intactos) 6047034 bytes alterados entre 1562948 e 2d63fc0
+[OK] T5 slot do NAM na vtable do Anxiety OD igual a v6 
+[OK] D1 arquivo do mesmo tamanho 
+[OK] D1 o arquivo inteiro esta coberto por blocos 
+[OK] D2 Evil relido do sistema de arquivos: conteudo e permissao conferem 0o100755
+[OK] D3 entre 3534 arquivos, so mudou o /usr/Evil/Evil ['/usr/Evil/Evil']
+[OK] D4 tamanho da particao inalterado 
+[OK] D5 xz descomprime de volta para o rootfs exato 59912704 bytes
+[OK] D6 abertura nova: mesmo tamanho cru da original (480x800 BGRA), alfa 255 
+[OK] D6 abertura nova: xz com CRC64 e dicionario de 4 MiB (igual a original) 
+[OK] D7 FIT final valido (hashes); 3 imagens; recoverysplash = original; splash = nova; rootfs = novo 
+[OK] D8 Update.img entre 70% e 102% da v6 (sobras de arte zeradas: 2.9 MB) 60230587 x 63084111 bytes
+[OK] D9 Update.img gravado e relido do disco: identico; o Evil dentro dele confere cd243896e0c95c4b5da059b7402efc3a093f69dd
+[OK] D10 pacote de restauracao com o SHA1 oficial; pacote de volta = v6 
+
+Pedal reduzido para caber na area: 8-Bit Crush.png 286x442 -> 165x255
+Pedal reduzido para caber na area: AIR Filter.png 286x442 -> 165x255
+Pedal reduzido para caber na area: AIR Flanger.png 286x437 -> 165x252
+Pedal reduzido para caber na area: AIR Reverb.png 286x437 -> 165x252
+Pedal reduzido para caber na area: AIR Vibrato.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Acoust Sim.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Acoustic Pre.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Ambi Verb.png 307x307 -> 165x165
+Pedal reduzido para caber na area: Anxiety OD V2.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Anxiety OD.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Auto Swell.png 286x437 -> 165x252
+Pedal reduzido para caber na area: B2 Drive.png 286x437 -> 165x252
+Pedal reduzido para caber na area: BBD Delay.png 286x436 -> 165x252
+Pedal reduzido para caber na area: Bass EQ.png 286x436 -> 165x252
+Pedal reduzido para caber na area: Black OP.png 310x437 -> 165x233
+Pedal reduzido para caber na area: Black Wah.png 228x401 -> 165x290
+Pedal reduzido para caber na area: Capo.png 286x455 -> 165x262
+Pedal reduzido para caber na area: Chord Wham.png 416x493 -> 165x196
+Pedal reduzido para caber na area: Chorus.png 286x436 -> 165x252
+Pedal reduzido para caber na area: D1 Dist.png 286x442 -> 165x255
+Pedal reduzido para caber na area: D250 Drive.png 286x442 -> 165x255
+Pedal reduzido para caber na area: DC Distort.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Dim Chorus.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Drop Tune.png 286x436 -> 165x252
+Pedal reduzido para caber na area: Env Filter.png 286x437 -> 165x252
+Pedal reduzido para caber na area: FX-Loop.png 286x455 -> 165x262
+Pedal reduzido para caber na area: Feedback.png 416x493 -> 165x196
+Pedal reduzido para caber na area: Flanger.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Gate.png 303x449 -> 165x245
+Pedal reduzido para caber na area: Glorious Drive.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Graphic EQ.png 286x455 -> 165x262
+Pedal reduzido para caber na area: Gray Comp.png 286x455 -> 165x262
+Pedal reduzido para caber na area: Green JRC-OD.png 303x449 -> 165x245
+Pedal reduzido para caber na area: Guitar Synth.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Harm.png 228x401 -> 165x290
+Pedal reduzido para caber na area: Hold.png 286x437 -> 165x252
+Pedal reduzido para caber na area: K Drive.png 290x247 -> 165x141
+Pedal reduzido para caber na area: MX Dist.png 286x442 -> 165x255
+Pedal reduzido para caber na area: More Wah.png 286x436 -> 165x252
+Pedal reduzido para caber na area: Oct Fuzz.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Octaves Up.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Octaves.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Orange Phaser.png 286x455 -> 165x262
+Pedal reduzido para caber na area: Panner.png 228x401 -> 165x290
+Pedal reduzido para caber na area: Party Verb.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Pitch Delay.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Reso Delay.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Reverse Delay.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Ring Mod.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Rotary.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Round Fuzz.png 256x256 -> 165x165
+Pedal reduzido para caber na area: S1 Drive.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Shimmer.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Shine Wah.png 228x401 -> 165x290
+Pedal reduzido para caber na area: Spring Reverb.png 286x436 -> 165x252
+Pedal reduzido para caber na area: Stereo Doubler.png 286x455 -> 165x262
+Pedal reduzido para caber na area: Stone Phaser.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Sustain.png 286x436 -> 165x252
+Pedal reduzido para caber na area: Ten Freq EQ.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Time Warp.png 416x493 -> 165x196
+Pedal reduzido para caber na area: Tremolo.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Tri Fuzz.png 286x436 -> 165x252
+Pedal reduzido para caber na area: Tron Filter.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Tron Phaser.png 286x437 -> 165x252
+Pedal reduzido para caber na area: Twelve String.png 303x449 -> 165x245
+Pedal reduzido para caber na area: Vibe Phaser.png 286x442 -> 165x255
+Pedal reduzido para caber na area: Vibrato.png 286x436 -> 165x252
+Pedal reduzido para caber na area: Volume.png 228x401 -> 165x290
+Pedal reduzido para caber na area: Wham.png 228x401 -> 165x290
+Pedal reduzido para caber na area: White Bass Wah.png 286x437 -> 165x252
+Pedal reduzido para caber na area: White Boost.png 286x442 -> 165x255
+Pedais com medidas novas (a tela ajusta): 83 ['8-Bit Crush.png', 'AIR Delay.png', 'AIR Filter.png', 'AIR Flanger.png', 'AIR Reverb.png', 'AIR Vibrato.png', 'Acoust Sim.png', 'Acoustic Pre.png', 'Ambi Verb.png', 'Anxiety OD V2.png', 'Anxiety OD.png', 'Auto Swell.png', 'B Dist 7000.png', 'B2 Drive.png', 'BBD Delay.png', 'Bass EQ.png', 'Black OP.png', 'Black Wah.png', 'Capo.png', 'Chord Wham.png', 'Chorus.png', 'D1 Dist.png', 'D250 Drive.png', 'DC Distort.png', 'Detune.png', 'Dim Chorus.png', 'Drop Tune.png', 'Dyn Delay.png', 'DynIII Comp.png', 'Eleven Reverb.png', 'Env Filter.png', 'FX-Loop.png', 'Feedback.png', 'Flanger.png', 'Gate.png', 'Glorious Drive.png', 'Graphic EQ.png', 'Gray Comp.png', 'Green JRC-OD.png', 'Guitar Synth.png', 'Harm.png', 'Hold.png', 'K Drive.png', 'MX Dist.png', 'More Wah.png', 'Multi Chorus.png', 'Noise Filter.png', 'Oct Fuzz.png', 'Octaves Up.png', 'Octaves.png', 'Orange Phaser.png', 'Panner.png', 'Para EQ.png', 'Party Verb.png', 'Pitch Delay.png', 'Reso Delay.png', 'Reverse Delay.png', 'Ring Mod.png', 'Rotary.png', 'Round Fuzz.png', 'S1 Drive.png', 'Shimmer.png', 'Shine Wah.png', 'Side Comp.png', 'Smart Harm.png', 'Spring Reverb.png', 'Stereo Doubler.png', 'Stone Phaser.png', 'Sustain.png', 'Tape Echo.png', 'Ten Freq EQ.png', 'Time Warp.png', 'Tremolo.png', 'Tri Fuzz.png', 'Tron Filter.png', 'Tron Phaser.png', 'Twelve String.png', 'Vibe Phaser.png', 'Vibrato.png', 'Volume.png', 'Wham.png', 'White Bass Wah.png', 'White Boost.png']
+
+SHA1 Update.img: cd243896e0c95c4b5da059b7402efc3a093f69dd
+SHA1 /usr/Evil/Evil: f68970ce5cf82dd0656267199e89603afc5e6f65
