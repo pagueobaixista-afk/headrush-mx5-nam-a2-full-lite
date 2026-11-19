@@ -1,10 +1,11 @@
 """MX5 NAM A2 - instalador.
 
-Monta, no seu computador, o firmware MX5 NAM A2 v6 a partir do atualizador OFICIAL da HeadRush 2.7.
+Monta, no seu computador, o firmware MX5 NAM A2 v7 a partir do atualizador OFICIAL da HeadRush 2.7.
 Uso: de dois cliques no instalador (baixa o atualizador oficial do site da inMusic) ou arraste o
 atualizador oficial (.exe/.zip) que voce ja tem para cima dele.
 
-Se o arquivo arte_pedais.bin estiver na mesma pasta, a arte dos pedais tambem entra."""
+Duas opcoes: arte Starcz (pedais e tela de abertura desenhados para o mod) ou arte original de fabrica
+(as imagens ficam as do proprio firmware oficial). Opcoes de linha de comando: --starcz / --fabrica."""
 import hashlib, json, lzma, os, shutil, struct, sys, tempfile
 
 FROZEN = getattr(sys, 'frozen', False)
@@ -13,9 +14,9 @@ BASE = os.path.dirname(os.path.abspath(sys.executable)) if FROZEN else os.path.d
 sys.path.insert(0, os.path.join(HERE, 'bridge'))
 import patcher, ext4, fitpatch, xzblocks, bridgepatch   # do MX5 Bridge 0.7 (TicT4x, licenca MIT)
 
-VERSAO = 'v6'
+VERSAO = 'v7'
 PAYLOAD = os.path.join(HERE, 'payload')
-SAIDA = 'MX5_NAM_A2_%s_PRONTO_PARA_GRAVAR' % VERSAO
+SAIDA = 'MX5_NAM_A2_%s_%s_PRONTO_PARA_GRAVAR'
 MAGIC_CORE, MAGIC_ART = b'MX5NAMCORE1\0', b'MX5NAMARTE1\0'
 sha1 = lambda b: hashlib.sha1(b).hexdigest()
 
@@ -108,7 +109,7 @@ def plano(fs, arte):
     return man, files
 
 
-# Recursos Qt do /usr/Evil/Evil da v6 com arte (SHA1 conferido antes): (tabela de nomes, arvore, dados)
+# Recursos Qt do /usr/Evil/Evil (mesmo lugar no oficial, v6 e v7) (SHA1 conferido antes): (tabela de nomes, arvore, dados)
 _RCC = ((44006720, 44035336, 25610928), (44021288, 44044000, 30005624), (44024240, 44046096, 36734176))
 
 
@@ -175,6 +176,8 @@ def monta(raw, arte):
     if lzma.decompress(xz) != img:
         raise Falha('conferencia da compressao falhou')
     new = fitpatch.replace_image(raw, 'rootfs', xz)
+    if arte:
+        new = fitpatch.replace_image(new, 'splash', open(os.path.join(PAYLOAD, 'splash_starcz.xz'), 'rb').read())
     if not fitpatch.verify(new):
         raise Falha('conferencia da imagem final falhou')
     return new, files
@@ -182,11 +185,23 @@ def monta(raw, arte):
 
 def main():
     diga('MX5 NAM A2 %s - instalador (nao oficial; use por sua conta e risco)\n' % VERSAO)
-    src = sys.argv[1] if len(sys.argv) > 1 else None
-    p_arte = os.path.join(BASE, 'arte_pedais.bin')
-    arte = open(p_arte, 'rb').read() if os.path.exists(p_arte) else None
-    diga('Arte dos pedais: %s' % ('SIM (arte_pedais.bin encontrado)' if arte else
-                                  'NAO (coloque arte_pedais.bin nesta pasta para incluir)'))
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    src = args[0] if args else None
+    if '--fabrica' in sys.argv:
+        esc = '2'
+    elif '--starcz' in sys.argv:
+        esc = '1'
+    else:
+        diga('Qual arte voce quer?\n'
+             '  1 = arte Starcz: pedais e tela de abertura novos, desenhados para o mod (recomendado)\n'
+             '  2 = arte original de fabrica da HeadRush (so o NAM A2 e os menus novos)')
+        try:
+            esc = input('Digite 1 ou 2 e aperte Enter [1]: ').strip() or '1'
+        except EOFError:
+            esc = '1'
+    arte = open(os.path.join(PAYLOAD, 'arte_starcz.bin'), 'rb').read() if esc != '2' else None
+    nome_arte = 'ARTE_STARCZ' if arte else 'ARTE_ORIGINAL'
+    diga('Arte: %s\n' % ('Starcz' if arte else 'original de fabrica'))
     work = tempfile.mkdtemp(prefix='mx5nam_')
     try:
         if not src:
@@ -202,11 +217,11 @@ def main():
         diga('Abrindo o atualizador oficial ...')
         folder = patcher.unpack(os.path.abspath(src), work)
         new, files = monta(open(os.path.join(folder, 'Update.img'), 'rb').read(), arte)
-        if arte:
+        if True:
             pasta_arte = os.path.join(BASE, 'MX-Edit', 'arte')
             n = exporta_arte_editor(files['/usr/Evil/Evil'][0], pasta_arte)
             diga('Arte do editor: %d imagens em %s' % (n, pasta_arte))
-        out = os.path.join(BASE, SAIDA)
+        out = os.path.join(BASE, SAIDA % (VERSAO, nome_arte))
         os.makedirs(out, exist_ok=True)
         open(os.path.join(out, 'Update.img'), 'wb').write(new)
         cfg_p = os.path.join(folder, 'Config.json')
@@ -229,6 +244,7 @@ def main():
          '  3. Abra FirmwareUpdater.exe nessa pasta e clique em "Instalar NAM A2 %s".\n'
          '     Nao desconecte ate terminar.\n'
          'Para voltar ao original: grave o atualizador oficial da HeadRush 2.7.\n'
+         'Para ter a outra arte: rode o instalador de novo e escolha a outra opcao.\n'
          'Se o MX5 nao ligar: segure os footswitches 1 e 2 ao ligar e grave o atualizador oficial.' % VERSAO)
     return 0
 

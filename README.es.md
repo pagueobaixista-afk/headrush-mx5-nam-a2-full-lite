@@ -10,7 +10,7 @@ Proyecto desarrollado y compilado con **Claude Fable 5.2** (Anthropic).
 
 ![MX-Edit en el PC](docs/mx-edit.png)
 
-<img src="docs/mx5-screen.jpg" alt="Pantalla del MX5" width="520">
+<img src="docs/mx5-v7-nam-a2.jpg" alt="Pantalla del MX5 con NAM A2 v7" width="620">
 
 *El mismo rig en MX-Edit, en el PC, con la imagen de cada pedal, y en la pantalla del MX5 (con el pedal NAM A2).*
 
@@ -18,21 +18,39 @@ Proyecto desarrollado y compilado con **Claude Fable 5.2** (Anthropic).
 
 > **Aviso.** Firmware no oficial, sin vínculo con HeadRush/inMusic. Instalar firmware modificado es bajo tu propio riesgo y puede anular la garantía; los autores no se responsabilizan por daños. El repositorio y el instalador **no** contienen el firmware ni el actualizador de HeadRush: el instalador parte del actualizador oficial, descargado del sitio de inMusic en el momento. Recuperación de la MX5: mantener los footswitches 1+2 al encender e instalar el actualizador oficial 2.7 (2+3 borra los rigs).
 
+## 🎬 Videos
+
+- **Demo (v7):** [NAM A2 Full/Lite sonando en la HeadRush MX5](https://youtu.be/nuovUCALZjI): pantalla de inicio, menú NAM A2 y el interruptor Lite/Full.
+- **Cómo instalar:** [video paso a paso](https://youtu.be/1Bj1k44fe2Y) (grabado con la v6; la v7 se instala igual y solo agrega la pregunta del arte).
+
+## Novedades de la v7
+
+- **NAM A2 con nombre y menú propios.** El pedal aparece como **NAM A2** en toda la pantalla, y el Model Selector tiene el botón **NAM A2** (entre Empty Slot y Amp), que abre directo la lista de modelos NAM.
+- **Pantalla del pedal hecha para NAM:** el Drive aparece como **MODEL NAM: N** (número del modelo) y el interruptor Hi-Lo como **NAM A2 LITE / FULL**.
+- **Dos opciones de arte, elegidas en el instalador:**
+  1. **Arte Starcz** (recomendada): imágenes nuevas de pedales, amps y gabinetes y nueva pantalla de inicio, dibujadas para el mod.
+  2. **Arte de fábrica:** las imágenes y la pantalla de inicio originales de HeadRush (tomadas del firmware oficial en tu PC; no se incluyen aquí).
+- Crédito en Global Settings (debajo del aviso de inMusic, que no cambia).
+- Motor NAM, sonido y `nam-sync.sh` iguales a la v6. Por dentro el pedal sigue siendo "Anxiety OD", así que rigs, presets y el editor de PC siguen funcionando.
+
+<img src="docs/abertura-v7.png" alt="Pantalla de inicio v7 (arte Starcz)" width="520">
+
 ## Cómo instalar (paso a paso)
 
-1. Entra en **[Releases](../../releases/latest)** y descarga **`MX5_NAM_A2_v6.zip`**.
+1. Entra en **[Releases](../../releases/latest)** y descarga **`MX5_NAM_A2_v7.zip`**.
 2. Clic derecho en el zip > **Extraer todo**.
-3. En la carpeta extraída, haz doble clic en **`Instalar_MX5_NAM_A2_v6.exe`**.
+3. En la carpeta extraída, haz doble clic en **`Instalar_MX5_NAM_A2_v7.exe`**.
+   - Pregunta qué arte quieres: escribe **1** (arte Starcz) o **2** (arte de fábrica) y pulsa Enter.
    - Descarga el actualizador oficial de HeadRush 2.7, arma el firmware y verifica todo (unos 2 minutos).
    - Si Windows avisa "Windows protegió su PC", haz clic en **Más información > Ejecutar de todas formas** (el programa no tiene firma digital de pago).
    - Sin internet: arrastra el actualizador oficial que ya tengas sobre el `.exe`.
-4. Aparecerá la carpeta **`MX5_NAM_A2_v6_PRONTO_PARA_GRAVAR`** ("lista para instalar").
+4. Aparecerá la carpeta **`MX5_NAM_A2_v7_ARTE_STARCZ_PRONTO_PARA_GRAVAR`** (o `..._ARTE_ORIGINAL_...`) ("lista para instalar").
 5. Conecta la MX5 a la corriente y al PC por USB. En la MX5: **Global Settings > … > Firmware Update**.
-6. Abre **`FirmwareUpdater.exe`** de esa carpeta y haz clic en **Instalar NAM A2 v6**. No desconectes hasta que termine.
-7. Copia tus `.nam` a la carpeta **`NAM`** de la unidad de la MX5, expulsa y toca **Sync**. Los modelos aparecen como presets del pedal Anxiety OD.
+6. Abre **`FirmwareUpdater.exe`** de esa carpeta y haz clic en **Instalar NAM A2 v7**. No desconectes hasta que termine.
+7. Copia tus `.nam` a la carpeta **`NAM`** de la unidad de la MX5, expulsa y toca **Sync**. Los modelos aparecen como presets del pedal **NAM A2** (Model Selector > **NAM A2**).
 8. Para editar en el PC, abre **`MX-Edit\MX-Edit.exe`** (cierra antes cualquier otro MX-Edit abierto). El instalador coloca en `MX-Edit\arte` las mismas imágenes de pedales, amplificadores y gabinetes que la MX5 muestra en pantalla.
 
-**Para volver al original:** instala el actualizador oficial de HeadRush 2.7 de la misma forma.
+**Para volver al original:** instala el actualizador oficial de HeadRush 2.7 de la misma forma. **Para cambiar de arte:** ejecuta el instalador de nuevo, elige la otra opción e instálalo. Desde la v6 puedes instalar la v7 directo; rigs y carpeta NAM se mantienen.
 
 > El instalador y los mensajes del equipo están, por ahora, en portugués.
 

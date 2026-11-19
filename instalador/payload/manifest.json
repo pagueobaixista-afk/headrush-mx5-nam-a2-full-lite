@@ -1,6 +1,6 @@
 {
  "formato": 1,
- "descricao": "MX5 NAM A2 v6 sobre o firmware oficial HeadRush MX5 2.7",
+ "descricao": "MX5 NAM A2 v7 sobre o firmware oficial HeadRush MX5 2.7",
  "firmware_oficial_sha1": "82b5639ceaba94d3c07b8880694d5de2e21b9f43",
  "arquivos": [
   {
@@ -26,12 +26,12 @@
    "modo": 33261,
    "uid": 0,
    "gid": 0,
-   "sha1": "a87a5d084fde8dcc3981fb4a5967559b25b59075",
+   "sha1": "b5b90aa3122d36f7f5082ec01453e95136ca3780",
    "tipo": "binario",
    "base_sha1": "b0f459e02f04e376e80acd209526f8e763ea6148",
-   "sha1_sem_arte": "237ba161c31b97ee8da79cba662d349135bda040",
+   "sha1_sem_arte": "c8ccd0f54c16a60117d3c85577b5abd8efba47ea",
    "fonte": "evil_core.bin",
-   "arte": "arte_pedais.bin"
+   "arte": "arte_starcz.bin"
   },
   {
    "caminho": "/usr/Evil/Scripts/evil",
