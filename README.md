@@ -77,7 +77,7 @@ Control files in the `NAM` folder: `nam_config.txt` (`quality=switch|lite|full|a
 
 Direct comparison: the same audio (2 s of the NeuralAmpModelerCore test signal + 10 s of DI bass, 48 kHz) was run through the official [NeuralAmpModelerCore](https://github.com/sdatkinson/NeuralAmpModelerCore) built on a PC and through the `libnam_hook.so` identical to the one on the unit (same SHA1), running under `qemu-arm` with the firmware's libraries, `t3k-mla` engine, Tone and Level at 0 dB.
 
-![NAM A2 Full and Lite on the MX5: match vs official NAM and time per block](docs/nam-a2-full-lite.png)
+![NAM A2 Full and Lite on the MX5: match vs official NAM and time per block](docs/nam-a2-full-lite-v2.png)
 
 Full sits around 130 dB below the official output, which is float rounding: the same sound. The NEON engines leave Full at 451 µs of the 1000 µs block. The grey bars are the engine of the base firmware, [lolgab/headrush-nam-mod](https://github.com/lolgab/headrush-nam-mod) v0.1.6: its automatic mode only accepts a level under 500 µs, so on the MX5 an A2 model always runs as Lite there (same sound as the Lite bars on the left, checked bit-exact in `motor/07_test.sh`).
 

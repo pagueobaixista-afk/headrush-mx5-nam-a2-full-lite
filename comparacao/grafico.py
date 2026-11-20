@@ -33,4 +33,4 @@ b.axhline(1000,color=I2,lw=1,ls="--",zorder=1); b.text(1.45,985,"block limit 100
 b.set_xticks(y); b.set_xticklabels(cat,color=I); b.set_ylim(0,1080); b.set_ylabel("time per 48-sample block (lower = more headroom)",color=I2)
 b.set_title("Speed on the MX5 (Full 1.58× faster)",loc="left",color=I,fontweight="bold")
 b.legend(frameon=False,loc="upper right",labelcolor=I,bbox_to_anchor=(1,0.9))
-fig.tight_layout(); fig.savefig(r"C:\Users\Starcz\Documents\arsenal\mx5\github\mx5-nam-a2\docs\nam-a2-full-lite.png",facecolor=S); print("ok")
+fig.tight_layout(); fig.savefig(r"C:\Users\Starcz\Documents\arsenal\mx5\github\mx5-nam-a2\docs\nam-a2-full-lite-v2.png",facecolor=S); print("ok")
