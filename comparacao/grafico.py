@@ -6,15 +6,21 @@ fig,(a,b)=plt.subplots(1,2,figsize=(12,4.6),dpi=150,gridspec_kw={"width_ratios":
 fig.patch.set_facecolor(S)
 m=["Sansamp Bass\nDriver 01","Darkglass Fuzz\nOMEGA","PP-DI-Only","B7K 6505+\nDistorted Bass"]
 full=[130.5,134.1,135.3,125.8]; lite=[24.6,26.5,22.7,16.1]
-x=np.arange(4); w=0.36
+x=np.arange(4); w=0.27
 for ax in (a,b):
     ax.set_facecolor(S); ax.grid(axis="y",color=G,zorder=0); ax.tick_params(length=0,colors=I2)
     [s.set_visible(False) for s in ax.spines.values()]
-a.bar(x-w/2-0.01,full,w,color=F,zorder=2,label="Full (High)"); a.bar(x+w/2+0.01,lite,w,color=L,zorder=2,label="Lite (Low)")
+REF=150
+a.bar(x-w-0.02,[REF]*4,w,color="#8a8984",hatch="////",edgecolor="#c3c2b7",linewidth=0.6,zorder=2,label="TONE3000 official (reference)")
+a.bar(x,full,w,color=F,zorder=2,label="this mod: Full (High)")
+a.bar(x+w+0.02,lite,w,color=L,zorder=2,label="Lite (Low) = lolgab v0.1.6")
 for i in range(4):
-    a.text(x[i]-w/2,full[i]+2,f"{full[i]:.0f}",ha="center",color=I,fontsize=9.5,fontweight="bold")
-    a.text(x[i]+w/2,lite[i]+2,f"{lite[i]:.0f}",ha="center",color=I,fontsize=9.5,fontweight="bold")
-a.set_xticks(x); a.set_xticklabels(m,color=I); a.set_ylim(0,165)
+    a.text(x[i]-w-0.02,REF+2,"∞",ha="center",color=I2,fontsize=10)
+    a.text(x[i],full[i]+2,f"{full[i]:.0f}",ha="center",color=I,fontsize=9.5,fontweight="bold")
+    a.text(x[i]+w+0.02,lite[i]+2,f"{lite[i]:.0f}",ha="center",color=I,fontsize=9.5,fontweight="bold")
+a.axhspan(100,REF,color="#e8f0fb",zorder=0,label="≥100 dB: identical (float rounding)")
+w=0.36
+a.set_xticks(x); a.set_xticklabels(m,color=I); a.set_ylim(0,185)
 a.set_ylabel("dB below the official output (higher = closer)",color=I2)
 a.set_title("Match vs official NAM (TONE3000 / NeuralAmpModelerCore)",loc="left",color=I,fontweight="bold")
 a.legend(frameon=False,loc="upper center",ncol=2,labelcolor=I,bbox_to_anchor=(0.5,1.01))
