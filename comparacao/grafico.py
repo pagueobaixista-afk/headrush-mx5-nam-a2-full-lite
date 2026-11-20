@@ -19,7 +19,7 @@ a.set_ylabel("dB below the official output (higher = closer)",color=I2)
 a.set_title("Match vs official NAM (TONE3000 / NeuralAmpModelerCore)",loc="left",color=I,fontweight="bold")
 a.legend(frameon=False,loc="upper center",ncol=2,labelcolor=I,bbox_to_anchor=(0.5,1.01))
 cat=["Full","Lite"]; orig=[715,108]; neon=[451,73]; y=np.arange(2)
-b.bar(y-w/2-0.01,orig,w,color=O,zorder=2,label="original engine"); b.bar(y+w/2+0.01,neon,w,color=F,zorder=2,label="MX5 NEON engine")
+b.bar(y-w/2-0.01,orig,w,color=O,zorder=2,label="lolgab v0.1.6 (base)"); b.bar(y+w/2+0.01,neon,w,color=F,zorder=2,label="this mod (NEON)")
 for i in range(2):
     b.text(y[i]-w/2,orig[i]+15,f"{orig[i]} µs",ha="center",color=I,fontsize=9.5,fontweight="bold")
     b.text(y[i]+w/2,neon[i]+15,f"{neon[i]} µs",ha="center",color=I,fontsize=9.5,fontweight="bold")

@@ -79,7 +79,7 @@ Direct comparison: the same audio (2 s of the NeuralAmpModelerCore test signal +
 
 ![NAM A2 Full and Lite on the MX5: match vs official NAM and time per block](docs/nam-a2-full-lite.png)
 
-Full sits around 130 dB below the official output, which is float rounding: the same sound. The NEON engines leave Full at 451 µs of the 1000 µs block.
+Full sits around 130 dB below the official output, which is float rounding: the same sound. The NEON engines leave Full at 451 µs of the 1000 µs block. The grey bars are the engine of the base firmware, [lolgab/headrush-nam-mod](https://github.com/lolgab/headrush-nam-mod) v0.1.6: its automatic mode only accepts a level under 500 µs, so on the MX5 an A2 model always runs as Lite there (same sound as the Lite bars on the left, checked bit-exact in `motor/07_test.sh`).
 
 | Model (A2) | High (Full) vs official | Low (Lite) vs official |
 |---|---|---|
