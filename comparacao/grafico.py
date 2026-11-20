@@ -1,36 +1,49 @@
+"""Gera docs/nam-a2-full-lite-v3.png (README). Dados: tabela do README (comparacao/run.sh) e medições no aparelho."""
+import os
 import matplotlib; matplotlib.use("Agg")
-import matplotlib.pyplot as plt, numpy as np
-S,I,I2,G="#fcfcfb","#0b0b0b","#52514e","#e4e3df"; F,L,O="#2a78d6","#86b6ef","#b4b2a9"
-plt.rcParams.update({"font.family":"Segoe UI","font.size":10.5})
-fig,(a,b)=plt.subplots(1,2,figsize=(12,4.6),dpi=150,gridspec_kw={"width_ratios":[1.6,1]})
+import matplotlib.pyplot as plt
+
+S, I, I2, G = "#fcfcfb", "#0b0b0b", "#52514e", "#e4e3df"
+BLUE, LIGHT, GREY, REF = "#2a78d6", "#86b6ef", "#b4b2a9", "#8a8984"
+
+# residual (dB) dos 4 modelos A2 da tabela -> % da energia do som que difere do oficial
+lite_db = [-24.6, -26.5, -22.7, -16.1]
+lite_pct = [100 * 10 ** (d / 10) for d in lite_db]
+lo, hi, avg = min(lite_pct), max(lite_pct), sum(lite_pct) / len(lite_pct)
+
+plt.rcParams.update({"font.family": "Segoe UI", "font.size": 11})
+fig, (a, b) = plt.subplots(1, 2, figsize=(12.5, 4.4), dpi=150)
 fig.patch.set_facecolor(S)
-m=["Sansamp Bass\nDriver 01","Darkglass Fuzz\nOMEGA","PP-DI-Only","B7K 6505+\nDistorted Bass"]
-full=[130.5,134.1,135.3,125.8]; lite=[24.6,26.5,22.7,16.1]
-x=np.arange(4); w=0.27
-for ax in (a,b):
-    ax.set_facecolor(S); ax.grid(axis="y",color=G,zorder=0); ax.tick_params(length=0,colors=I2)
+for ax in (a, b):
+    ax.set_facecolor(S); ax.grid(axis="x", color=G, zorder=0); ax.tick_params(length=0, colors=I2)
     [s.set_visible(False) for s in ax.spines.values()]
-REF=150
-a.bar(x-w-0.02,[REF]*4,w,color="#8a8984",hatch="////",edgecolor="#c3c2b7",linewidth=0.6,zorder=2,label="TONE3000 official (reference)")
-a.bar(x,full,w,color=F,zorder=2,label="this mod: Full (High)")
-a.bar(x+w+0.02,lite,w,color=L,zorder=2,label="Lite (Low) = lolgab v0.1.6")
-for i in range(4):
-    a.text(x[i]-w-0.02,REF+2,"∞",ha="center",color=I2,fontsize=10)
-    a.text(x[i],full[i]+2,f"{full[i]:.0f}",ha="center",color=I,fontsize=9.5,fontweight="bold")
-    a.text(x[i]+w+0.02,lite[i]+2,f"{lite[i]:.0f}",ha="center",color=I,fontsize=9.5,fontweight="bold")
-a.axhspan(100,REF,color="#e8f0fb",zorder=0,label="≥100 dB: identical (float rounding)")
-w=0.36
-a.set_xticks(x); a.set_xticklabels(m,color=I); a.set_ylim(0,185)
-a.set_ylabel("dB below the official output (higher = closer)",color=I2)
-a.set_title("Match vs official NAM (TONE3000 / NeuralAmpModelerCore)",loc="left",color=I,fontweight="bold")
-a.legend(frameon=False,loc="upper center",ncol=2,labelcolor=I,bbox_to_anchor=(0.5,1.01))
-cat=["Full","Lite"]; orig=[715,108]; neon=[451,73]; y=np.arange(2)
-b.bar(y-w/2-0.01,orig,w,color=O,zorder=2,label="lolgab v0.1.6 (base)"); b.bar(y+w/2+0.01,neon,w,color=F,zorder=2,label="this mod (NEON)")
-for i in range(2):
-    b.text(y[i]-w/2,orig[i]+15,f"{orig[i]} µs",ha="center",color=I,fontsize=9.5,fontweight="bold")
-    b.text(y[i]+w/2,neon[i]+15,f"{neon[i]} µs",ha="center",color=I,fontsize=9.5,fontweight="bold")
-b.axhline(1000,color=I2,lw=1,ls="--",zorder=1); b.text(1.45,985,"block limit 1000 µs",ha="right",va="top",color=I2,fontsize=9)
-b.set_xticks(y); b.set_xticklabels(cat,color=I); b.set_ylim(0,1080); b.set_ylabel("time per 48-sample block (lower = more headroom)",color=I2)
-b.set_title("Speed on the MX5 (Full 1.58× faster)",loc="left",color=I,fontweight="bold")
-b.legend(frameon=False,loc="upper right",labelcolor=I,bbox_to_anchor=(1,0.9))
-fig.tight_layout(); fig.savefig(r"C:\Users\Starcz\Documents\arsenal\mx5\github\mx5-nam-a2\docs\nam-a2-full-lite-v2.png",facecolor=S); print("ok")
+
+# 1) diferença de som
+rows = [("TONE3000 official NAM", 0, REF, "0%  (reference)"),
+        ("MX5 Full (this mod)", 0, BLUE, "0%  identical sound"),
+        ("MX5 Lite (this mod and lolgab v0.1.6)", avg, LIGHT, f"{avg:.1f}% on average ({lo:.1f}–{hi:.1f}%)")]
+for y, (lab, v, c, txt) in zip(range(len(rows))[::-1], rows):
+    a.barh(y, max(v, 0.02), height=0.55, color=c, zorder=2)
+    a.text(max(v, 0.02) + 0.06, y, txt, va="center", color=I, fontsize=10.5, fontweight="bold")
+a.set_yticks(range(len(rows))[::-1]); a.set_yticklabels([r[0] for r in rows], color=I)
+a.set_xlim(0, 3); a.set_xticks([0, 1, 2, 3]); a.set_xticklabels(["0%", "1%", "2%", "3%"])
+a.set_title("How different the sound is from official NAM\n(lower = closer; same input, 4 A2 bass models)",
+            loc="left", color=I, fontweight="bold", fontsize=11.5)
+
+# 2) uso do processador
+rows = [("Full, lolgab v0.1.6\n(over its 50% limit: plays Lite)", 71.5, GREY, "72%"),
+        ("Full, this mod", 45.1, BLUE, "45%  runs live"),
+        ("Lite, lolgab v0.1.6", 10.8, GREY, "11%"),
+        ("Lite, this mod", 7.3, LIGHT, "7%")]
+for y, (lab, v, c, txt) in zip(range(len(rows))[::-1], rows):
+    b.barh(y, v, height=0.55, color=c, zorder=2)
+    b.text(v + 1.5, y, txt, va="center", color=I, fontsize=10.5, fontweight="bold")
+b.axvline(100, color=I2, lw=1, ls="--"); b.text(99, -0.45, "100% = no time left", ha="right", color=I2, fontsize=9)
+b.set_yticks(range(len(rows))[::-1]); b.set_yticklabels([r[0] for r in rows], color=I)
+b.set_xlim(0, 112); b.set_xticks([0, 25, 50, 75, 100]); b.set_xticklabels(["0%", "25%", "50%", "75%", "100%"])
+b.set_title("How much of the MX5's audio time NAM uses\n(lower = more room for other effects)",
+            loc="left", color=I, fontweight="bold", fontsize=11.5)
+
+fig.tight_layout(w_pad=3)
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "docs", "nam-a2-full-lite-v3.png")
+fig.savefig(out, facecolor=S); print("ok", out)
