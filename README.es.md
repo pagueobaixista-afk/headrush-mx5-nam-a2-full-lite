@@ -20,6 +20,7 @@ Proyecto desarrollado y compilado con **Claude Fable 5.2** (Anthropic).
 
 ## 🎬 Videos
 
+- **v8 (1 min):** [pantalla de inicio y los controles del NAM A2 Pro](https://youtu.be/ya98Bz6-3lg).
 - **Demo (v7):** [NAM A2 Full/Lite sonando en la HeadRush MX5](https://youtu.be/nuovUCALZjI): pantalla de inicio, menú NAM A2 y el interruptor Lite/Full.
 - **Cómo instalar:** [video paso a paso](https://youtu.be/1Bj1k44fe2Y) (grabado con la v6; la v7 se instala igual y solo agrega la pregunta del arte).
 

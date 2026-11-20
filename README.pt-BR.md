@@ -20,6 +20,7 @@ Projeto desenvolvido e compilado com o **Claude Fable 5.2** (Anthropic).
 
 ## 🎬 Vídeos
 
+- **v8 (1 min):** [tela de abertura e os controles do NAM A2 Pro](https://youtu.be/ya98Bz6-3lg).
 - **Demonstração (v7):** [NAM A2 Full/Lite tocando na HeadRush MX5](https://youtu.be/nuovUCALZjI): abertura, menu NAM A2 e a chave Lite/Full.
 - **Como instalar:** [vídeo passo a passo](https://youtu.be/1Bj1k44fe2Y) (gravado com a v6; a v7 instala do mesmo jeito e só acrescenta a pergunta da arte).
 
