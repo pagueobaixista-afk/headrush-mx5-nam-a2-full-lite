@@ -1,4 +1,4 @@
-# HeadRush MX5 NAM A2 Full/Lite
+# HeadRush MX5 NAM A2 Pro (Full/Lite)
 
 [English](README.md) | **Português** | [Español](README.es.md)
 
@@ -23,55 +23,53 @@ Projeto desenvolvido e compilado com o **Claude Fable 5.2** (Anthropic).
 - **Demonstração (v7):** [NAM A2 Full/Lite tocando na HeadRush MX5](https://youtu.be/nuovUCALZjI): abertura, menu NAM A2 e a chave Lite/Full.
 - **Como instalar:** [vídeo passo a passo](https://youtu.be/1Bj1k44fe2Y) (gravado com a v6; a v7 instala do mesmo jeito e só acrescenta a pergunta da arte).
 
-## Novidades da v7
+## Novidades da v8: NAM A2 Pro
 
-- **NAM A2 com nome e menu próprios.** O pedal aparece como **NAM A2** em toda a tela, e o Model Selector ganhou o botão **NAM A2** (entre Empty Slot e Amp), que abre direto a lista de modelos NAM.
-- **Tela do pedal feita para o NAM:** o Drive aparece como **MODEL NAM: N** (número do modelo) e a chave Hi-Lo como **NAM A2 LITE / FULL**.
-- **Duas opções de arte, escolhidas no instalador:**
-  1. **Arte Starcz** (recomendada): imagens novas de pedais, amps e gabinetes e nova tela de abertura, desenhadas para o mod.
-  2. **Arte de fábrica:** as imagens e a abertura originais da HeadRush (tiradas do firmware oficial no seu PC; não vão neste projeto).
-- Crédito em Global Settings (abaixo do aviso da inMusic, que continua igual).
-- Motor NAM, som e `nam-sync.sh` iguais aos da v6. Por dentro o pedal continua "Anxiety OD", então rigs, presets e o editor de PC continuam funcionando.
+**Feito por um baixista.** A v8 tira o NAM do Anxiety OD e o coloca num pedal com botões suficientes: o **8-Bit Crush** vira o **NAM A2 Pro**. Os controles foram escolhidos pensando no baixo: um blend que mantém o grave limpo e firme por baixo da distorção, um EQ com faixas úteis para baixo e um gate para os modelos com mais ganho.
 
-<img src="docs/abertura-v7.png" alt="Abertura da v7 (arte Starcz)" width="520">
+<img src="docs/abertura-v8.png" alt="Tela de abertura da v8" width="520">
+
+**Os controles do NAM A2 Pro, em palavras simples:**
+
+| Na tela | O que faz |
+|---|---|
+| **NAM LITE / FULL / AUTO** | Tamanho do modelo. **FULL** soa idêntico ao NAM oficial; **LITE** pesa menos no processador; **AUTO** escolhe sozinho. |
+| **MODEL NAM** | Escolhe o modelo. **1 clique do botão = 1 modelo.** Também dá para escolher pelo nome na lista de presets. |
+| **INPUT** | Quanto sinal entra no modelo: mais = mais saturação, como o ganho de um amplificador. 50% = 0 dB. |
+| **OUTPUT** | Volume de saída, sem mudar o timbre. 50% = 0 dB. |
+| **BLEND** | Mistura do baixo limpo com o NAM. 100% = só NAM. Abaixo disso, o grave limpo fica por baixo da distorção, como nos pedais de drive para baixo. |
+| **BASS / TREBLE** | Grave e agudo depois do NAM. 50% = sem mudança. |
+| **MID / MID FREQ / MID Q** | Um médio ajustável. MID em 0 dB = sem mudança. |
+| **GATE** | Corta o ruído quando você não está tocando. No mínimo, fica desligado. |
+
+**Para desligar o EQ:** ele se desliga sozinho na posição neutra (BASS e TREBLE em 50%, MID em 0 dB), e **MID Q em 0% mostra EQ OFF** e tira o EQ inteiro de uma vez.
+
+**Também na v8**
+
+- **NAM num núcleo próprio do processador.** A MX5 tem 4 núcleos e o áudio roda em um; agora o NAM roda num núcleo livre (+1 ms de atraso), deixando espaço para os outros efeitos. O carregamento dos modelos também saiu do núcleo do áudio: a troca de rig ficou mais rápida e mais limpa.
+- **Presets pelo nome, neutros.** Cada `.nam` vira um preset do NAM A2 Pro com tudo neutro (sem nivelamento automático de volume; você ajusta). Os presets de fábrica do 8-Bit Crush são removidos, porque não fazem sentido para o NAM.
+- **Nova tela de abertura** e arte nova para vários pedais.
+- **Instalador em português, inglês e espanhol**, e o editor **MX-Edit** vai **portátil**, já com a arte.
+- **O Anxiety OD voltou a ser o pedal original.** Rigs da v7 que usavam o NAM dentro do Anxiety OD precisam ser refeitos com o NAM A2 Pro.
+
+**Como funciona o Sync:** copie os `.nam` para a pasta `NAM` do drive da MX5 e toque em **Sync**. A MX5 numera sozinha os arquivos novos (`NNN - nome`) e, de 10 a 60 segundos depois, o **aplicativo reinicia sozinho uma vez** para criar os presets e corrigir os rigs salvos. Não é travamento: não desligue. Se você só copiar os arquivos e ligar a MX5, tudo acontece durante a partida. O número mantém a ordem fixa: modelos novos vão para o fim e nada do que você já tem muda de lugar.
 
 ## Como instalar (passo a passo)
 
-1. Entre em **[Releases](../../releases/latest)** e baixe o arquivo **`MX5_NAM_A2_v7.zip`**.
-2. Clique com o botão direito no zip > **Extrair tudo**.
-3. Na pasta extraída, dê dois cliques em **`Instalar_MX5_NAM_A2_v7.exe`**.
-   - Ele pergunta qual arte você quer: digite **1** (arte Starcz) ou **2** (arte de fábrica) e aperte Enter.
-   - Ele baixa o atualizador oficial da HeadRush 2.7, monta o firmware e confere tudo (uns 2 minutos).
-   - Se o Windows avisar "O Windows protegeu o computador", clique em **Mais informações > Executar assim mesmo** (o programa não tem assinatura digital paga).
-   - Sem internet: arraste o atualizador oficial que você já tem para cima do `.exe`.
-4. Vai aparecer a pasta **`MX5_NAM_A2_v7_ARTE_STARCZ_PRONTO_PARA_GRAVAR`** (ou `..._ARTE_ORIGINAL_...`).
-5. Ligue o MX5 na tomada e no PC pelo USB. No MX5: **Global Settings > … > Firmware Update**.
-6. Abra **`FirmwareUpdater.exe`** dessa pasta e clique em **Instalar NAM A2 v7**. Não desconecte até terminar.
-7. Copie seus `.nam` para a pasta **`NAM`** do drive do MX5, ejete e toque em **Sync**. Os modelos aparecem como presets do pedal **NAM A2** (Model Selector > **NAM A2**).
-8. Para editar no PC, abra **`MX-Edit\MX-Edit.exe`** (feche antes outro MX-Edit que estiver aberto). O instalador coloca em `MX-Edit\arte` as mesmas imagens de pedal, amplificador e gabinete que o MX5 mostra na tela.
+1. Vá em **[Releases](../../releases/latest)** e baixe **`MX5_NAM_A2_v8.zip`**. Extraia.
+2. Dê dois cliques em **`Instalar_MX5_NAM_A2_v8.exe`** (deixe a pasta `_instalador_arquivos` ao lado). Escolha o idioma e a arte (1 = Starcz, 2 = de fábrica). Ele baixa o atualizador oficial da HeadRush 2.7 e monta o firmware (uns 2 minutos). Se o Windows ou o antivírus avisar, clique em **Mais informações > Executar assim mesmo** (não há certificado pago de assinatura; o código está aqui).
+3. Ligue a MX5 na tomada e no USB. Na MX5: **Global Settings > … > Firmware Update**.
+4. Abra **`FirmwareUpdater.exe`** na pasta `MX5_NAM_A2_v8_ARTE_…_PRONTO_PARA_GRAVAR` e clique em **Instalar NAM A2 v8**. Não desconecte até terminar.
+5. Copie os `.nam` para a pasta **`NAM`** e toque em **Sync** (veja acima). Na MX5: **Model Selector > NAM A2**.
+6. Editor no PC: **`MX-Edit\MX-Edit.exe`** (portátil, já com a arte).
 
-**Para voltar ao original:** grave o atualizador oficial da HeadRush 2.7 do mesmo jeito. **Para trocar de arte:** rode o instalador de novo, escolha a outra opção e grave. Quem está na v6 pode gravar a v7 direto; rigs e pasta NAM continuam.
-
-## O que faz
-
-- **NAM dentro do pedal Anxiety OD.** O knob Drive escolhe o modelo (posição na pasta `NAM`), Tone é o ganho de entrada e Level o de saída.
-- **A2 Lite e Full pela chave Hi-Lo.** Low = submodelo reduzido (Lite), High = modelo completo (Full). Dá para virar tocando.
-- **Motores A2 mais rápidos.** Os motores `t3k` portados para NEON são escolhidos por medição no próprio aparelho. Medido no MX5: Full de 715 µs para 451 µs por bloco de 48 amostras (1,58×), Lite de 108 para 73 µs. O bloco dura 1000 µs.
-- **Menos carga à toa.** Sinal mono (L igual a R) é processado uma vez só; a contagem de instâncias ativas foi corrigida; as threads de carga de modelo ficam fora do núcleo e da prioridade do áudio.
-- **Lista de modelos como um carregador de IR.** Cada `.nam` vira um preset `NNN - nome` do Anxiety OD.
-- **Sincronização automática** (`nam-sync.sh`), na partida e ao sair da transferência USB (Sync):
-  - numera os `.nam` novos com o próximo número livre, para as posições antigas não mudarem;
-  - valida os arquivos e move os defeituosos para `NAM/_com_defeito`;
-  - cria, atualiza e remove os presets;
-  - corrige o Drive nos rigs salvos se um modelo mudar de posição (com cópia do banco antes);
-  - calcula o Level do preset pelo `metadata.loudness` do modelo (opcional, ver abaixo);
-  - reinicia o aplicativo sozinho quando a lista mudou e grava um relatório em `NAM/nam_sync_relatorio.txt`.
-
-Arquivos de controle na pasta `NAM`: `nam_config.txt` (`quality=switch|lite|full|auto`), `nam_sync.txt` (`alvo=`, `nivelar=0`), `nam_sync_off.txt`, `nam_restart_off.txt`.
-
-**Sobre o nivelamento de volume:** ele iguala o volume percebido, mas muda o quanto o modelo empurra os blocos seguintes do rig, e alguns acabam saturando. Na prática o Level precisa de ajuste manual por rig; use `nivelar=0` se preferir todos em 50.
+**Para voltar ao original:** grave o atualizador oficial da HeadRush 2.7. **Se a MX5 não ligar:** segure os footswitches 1+2 ao ligar e grave o atualizador oficial.
 
 ## Quão fiel é ao NAM oficial
+
+![NAM A2 na MX5 e na GP-5: diferença para o NAM oficial e tempo de processamento](docs/nam-a2-v8.png)
+
+**Esquerda:** quanto o som difere do NAM oficial, com o mesmo modelo A2 de baixo (AGONY DG1) e o mesmo DI para todos. A MX5 Full é idêntica; a Lite é uma rede menor e difere um pouco. Para referência, a **Valeton GP-5** com o [NAM-Loader do OpenGP5](https://github.com/OpenGP5) (firmware aberto de terceiros) só comporta o A2 Lite (o Full não cabe no processador dela): 6,5% com o loader original, 1,4% com um modelo retreinado para a taxa de 44,1 kHz dela. **Direita:** parte de cada bloco de áudio de 1 ms que o NAM ocupa na MX5. Com os motores NEON o Full ocupa 45% e roda ao vivo (na v8, num núcleo próprio); com o motor padrão do NAM ocuparia 72% e cairia para Lite.
 
 Comparação direta: o mesmo áudio (2 s do sinal de teste do NeuralAmpModelerCore + 10 s de baixo gravado em linha, 48 kHz) passou pelo [NeuralAmpModelerCore](https://github.com/sdatkinson/NeuralAmpModelerCore) oficial compilado no PC e pelo `libnam_hook.so` idêntico ao do aparelho (mesmo SHA1), rodando em `qemu-arm` com as bibliotecas do firmware, motor `t3k-mla`, Tone e Level em 0 dB.
 

@@ -76,7 +76,7 @@ def pack(magic, base_sha, result_sha, rs, src):
 stock, v6, namonly = walk(load(stock_p)), walk(load(v6_p)), walk(load(namonly_p))
 assert {p for p in v6 if v6[p] != namonly.get(p)} == {'/usr/Evil/Evil'}
 os.makedirs(os.path.join(out, 'payload', 'files'), exist_ok=True)
-man = {'formato': 1, 'descricao': 'MX5 NAM A2 v7 sobre o firmware oficial HeadRush MX5 2.7',
+man = {'formato': 1, 'descricao': 'MX5 NAM A2 v8 sobre o firmware oficial HeadRush MX5 2.7',
        'firmware_oficial_sha1': sha1(open(stock_p, 'rb').read()), 'arquivos': []}
 for p in sorted(set(stock) | set(v6)):
     a, b = stock.get(p), v6.get(p)
