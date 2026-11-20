@@ -1,4 +1,4 @@
-"""Gera docs/nam-a2-full-lite-v3.png (README). Dados: tabela do README (comparacao/run.sh) e medições no aparelho."""
+"""Gera docs/nam-a2-full-lite-v4.png (README). Dados: tabela do README (comparacao/run.sh) e medições no aparelho."""
 import os
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -21,7 +21,7 @@ for ax in (a, b):
 # 1) diferença de som
 rows = [("TONE3000 official NAM", 0, REF, "0%  (reference)"),
         ("MX5 Full (this mod)", 0, BLUE, "0%  identical sound"),
-        ("MX5 Lite (this mod and lolgab v0.1.6)", avg, LIGHT, f"{avg:.1f}% on average ({lo:.1f}–{hi:.1f}%)")]
+        ("MX5 Lite", avg, LIGHT, f"{avg:.1f}% on average ({lo:.1f}–{hi:.1f}%)")]
 for y, (lab, v, c, txt) in zip(range(len(rows))[::-1], rows):
     a.barh(y, max(v, 0.02), height=0.55, color=c, zorder=2)
     a.text(max(v, 0.02) + 0.06, y, txt, va="center", color=I, fontsize=10.5, fontweight="bold")
@@ -31,10 +31,10 @@ a.set_title("How different the sound is from official NAM\n(lower = closer; same
             loc="left", color=I, fontweight="bold", fontsize=11.5)
 
 # 2) uso do processador
-rows = [("Full, lolgab v0.1.6\n(over its 50% limit: plays Lite)", 71.5, GREY, "72%"),
-        ("Full, this mod", 45.1, BLUE, "45%  runs live"),
-        ("Lite, lolgab v0.1.6", 10.8, GREY, "11%"),
-        ("Lite, this mod", 7.3, LIGHT, "7%")]
+rows = [("Full, standard NAM engine\n(too heavy: falls back to Lite)", 71.5, GREY, "72%"),
+        ("Full, this mod (NEON)", 45.1, BLUE, "45%  runs live"),
+        ("Lite, standard NAM engine", 10.8, GREY, "11%"),
+        ("Lite, this mod (NEON)", 7.3, LIGHT, "7%")]
 for y, (lab, v, c, txt) in zip(range(len(rows))[::-1], rows):
     b.barh(y, v, height=0.55, color=c, zorder=2)
     b.text(v + 1.5, y, txt, va="center", color=I, fontsize=10.5, fontweight="bold")
@@ -45,5 +45,5 @@ b.set_title("How much of the MX5's audio time NAM uses\n(lower = more room for o
             loc="left", color=I, fontweight="bold", fontsize=11.5)
 
 fig.tight_layout(w_pad=3)
-out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "docs", "nam-a2-full-lite-v3.png")
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "docs", "nam-a2-full-lite-v4.png")
 fig.savefig(out, facecolor=S); print("ok", out)

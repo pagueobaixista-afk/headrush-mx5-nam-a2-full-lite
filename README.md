@@ -77,9 +77,9 @@ Control files in the `NAM` folder: `nam_config.txt` (`quality=switch|lite|full|a
 
 Direct comparison: the same audio (2 s of the NeuralAmpModelerCore test signal + 10 s of DI bass, 48 kHz) was run through the official [NeuralAmpModelerCore](https://github.com/sdatkinson/NeuralAmpModelerCore) built on a PC and through the `libnam_hook.so` identical to the one on the unit (same SHA1), running under `qemu-arm` with the firmware's libraries, `t3k-mla` engine, Tone and Level at 0 dB.
 
-![NAM A2 on the MX5: sound difference from official NAM, and processing time used](docs/nam-a2-full-lite-v3.png)
+![NAM A2 on the MX5: sound difference from official NAM, and processing time used](docs/nam-a2-full-lite-v4.png)
 
-**Left:** how much of the sound differs from official NAM (energy of the difference, same input). Full is identical; Lite is a smaller network and differs a little, more on high-gain models. **Right:** share of each 1 ms audio block that NAM takes on the MX5. With the NEON engines Full takes 45% and runs live. In the base firmware, [lolgab/headrush-nam-mod](https://github.com/lolgab/headrush-nam-mod) v0.1.6, Full would take 72%, over its 50% limit, so A2 models play as Lite there (its Lite output is bit-exact with this mod's Lite, checked in `motor/07_test.sh`).
+**Left:** how much of the sound differs from official NAM (energy of the difference, same input). Full is identical; Lite is a smaller network and differs a little, more on high-gain models. **Right:** share of each 1 ms audio block that NAM takes on the MX5. With the NEON engines Full takes 45% and runs live. The grey bars are the standard NAM engine (the unmodified [NeuralAmpModelerCore](https://github.com/sdatkinson/NeuralAmpModelerCore), as used by earlier MX5 NAM mods): Full would take 72%, too much to run safely, so A2 models fall back to Lite with it. Lite sounds the same in both (bit-exact, checked in `motor/07_test.sh`).
 
 Exact numbers:
 
