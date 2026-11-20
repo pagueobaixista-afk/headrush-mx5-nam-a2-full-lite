@@ -10,9 +10,7 @@ Project developed and built with **Claude Fable 5.2** (Anthropic).
 
 ![MX-Edit on the PC](docs/mx-edit.png)
 
-<img src="docs/mx5-v7-nam-a2.jpg" alt="MX5 screen with NAM A2 v7" width="620">
-
-*The same rig in MX-Edit on the PC, with the picture of each pedal, and on the MX5 screen (with the NAM A2 pedal).*
+*MX-Edit on the PC, with the picture of each pedal.*
 
 **PC editor:** [HeadRush MX5 PC Editor (MX-Edit fork)](https://github.com/pagueobaixista-afk/MX-Edit) – connects to the MX5 right away on Windows 11 and shows the picture of each pedal. The installer of this project already includes it.
 
