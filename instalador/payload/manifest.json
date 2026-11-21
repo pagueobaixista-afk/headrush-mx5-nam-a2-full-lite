@@ -1,6 +1,6 @@
 {
  "formato": 1,
- "descricao": "MX5 NAM A2 v8 sobre o firmware oficial HeadRush MX5 2.7",
+ "descricao": "MX5 NAM A2 v9.1 sobre o firmware oficial HeadRush MX5 2.7",
  "firmware_oficial_sha1": "82b5639ceaba94d3c07b8880694d5de2e21b9f43",
  "arquivos": [
   {
@@ -26,10 +26,10 @@
    "modo": 33261,
    "uid": 0,
    "gid": 0,
-   "sha1": "c7bfe228bb088d34634fe88ec8a349f1f7dbb30f",
+   "sha1": "c00c646dd4e46913e8d79c67ebc081296a00190c",
    "tipo": "binario",
    "base_sha1": "b0f459e02f04e376e80acd209526f8e763ea6148",
-   "sha1_sem_arte": "b415dbc5254462401052c3fe2f7e52adc4c108e7",
+   "sha1_sem_arte": "f169be42b2f12386a0a0807745b6e2147478d1d2",
    "fonte": "evil_core.bin",
    "arte": "arte_starcz.bin"
   },
@@ -147,7 +147,7 @@
    "modo": 33261,
    "uid": 0,
    "gid": 0,
-   "sha1": "d68a2dec448f624cdc9f460f28b04fecd69a6896",
+   "sha1": "3f3a90db499114dceac143fca35d74c15be678e2",
    "tipo": "novo",
    "fonte": "files/usr/Evil/Scripts/nam-sync.sh"
   },
@@ -292,7 +292,7 @@
    "modo": 33261,
    "uid": 0,
    "gid": 0,
-   "sha1": "e77cbbe5c2afeb3f3ba30183a598d06caa514e0a",
+   "sha1": "b63a9932748c571038b913395a8f8d1853dfb21f",
    "tipo": "novo",
    "fonte": "files/usr/Evil/libnam_hook.so"
   },

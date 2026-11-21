@@ -1,5 +1,5 @@
 #!/bin/sh
-# nam-sync.sh [boot|transfer|deferred]  (v8: NAM A2 Pro no 8-Bit Crush)
+# nam-sync.sh [boot|transfer|deferred]  (v9: NAM A2 Pro no 8-Bit Crush)
 # Chamado na partida (runevil) e toda vez que o drive USB e remontado (mount_usb_img: partida e
 # saida da transferencia USB / Sync).
 #  1) .nam sem prefixo "NNN - " ganha o proximo numero livre (vai para o fim da lista)
@@ -8,7 +8,7 @@
 #     (NAM A2 Pro) nos rigs salvos e corrigido para continuar no MESMO modelo (com copia do banco antes)
 #  4) um preset do 8-Bit Crush por modelo (nome = arquivo sem .nam, Resample = posicao/1000 (1 clique = 1 modelo) na ordem
 #     alfabetica, a mesma do libnam_hook), tudo neutro: INPUT/OUTPUT 0 dB, EQ plano, BLEND 100%,
-#     gate desligado, NAM A2 em AUTO. Sem nivelamento de volume (cada um ajusta).
+#     gate em -40 dB (valor guardado -30; a v9 aplica 10 dB abaixo), NAM A2 em FULL (Bit Mode A). Sem nivelamento de volume (cada um ajusta).
 #     Presets "NNN - ..." sem arquivo sao removidos; os "NNN - ..." antigos do Anxiety OD (v7) tambem
 #  5) com o aplicativo aberto (saida da transferencia USB) so os passos 1 e 2 rodam na hora: o
 #     aplicativo regrava o banco a partir da memoria ao terminar o proprio Sync, e o que fosse
@@ -198,9 +198,33 @@ insert into blocks (id, type, name, content, is_readonly)
 		|| substr(hex(randomblob(2)), 2) || '-' || hex(randomblob(6))), '8-BIT CRUSH', name,
 		'{"data":{"8-Bit Crush":{"childorder":["Freq","Q","Drive","FXOut","Mix","ThresholdExp","ThresholdComp","Resampling","AntiAliasing","Mode","BitGainScale","Bit1","Bit2","Bit3","Bit4","Bit5","Bit6","Bit7","Bit8"],"children":{'
 		|| '"AntiAliasing":{"type":0,"value":50},"Bit1":{"string":"Thru","type":4},"Bit2":{"string":"Thru","type":4},"Bit3":{"string":"Thru","type":4},"Bit4":{"string":"Thru","type":4},"Bit5":{"string":"Thru","type":4},"Bit6":{"string":"Thru","type":4},"Bit7":{"string":"Thru","type":4},"Bit8":{"string":"Thru","type":4},'
-		|| '"BitGainScale":{"type":0,"value":50},"Drive":{"type":0,"value":6},"FXOut":{"type":0,"value":-12},"Freq":{"type":0,"value":500},"Mix":{"type":0,"value":100},"Mode":{"string":"Off","type":4},"Q":{"type":0,"value":50},'
-		|| '"Resampling":{"type":0,"value":' || (pos / 1000.0) || '},"ThresholdComp":{"type":0,"value":-15},"ThresholdExp":{"type":0,"value":-60}}}},"info":{"version":"1.0.9"}}', 0
+		|| '"BitGainScale":{"type":0,"value":50},"Drive":{"type":0,"value":6},"FXOut":{"type":0,"value":-12},"Freq":{"type":0,"value":500},"Mix":{"type":0,"value":100},"Mode":{"string":"A","type":4},"Q":{"type":0,"value":50},'
+		|| '"Resampling":{"type":0,"value":' || (pos / 1000.0) || '},"ThresholdComp":{"type":0,"value":-15},"ThresholdExp":{"type":0,"value":-30}}}},"info":{"version":"1.0.9"}}', 0
 	from want where name not in (select name from blocks where type = '8-BIT CRUSH');
+-- v9.1: o Drop Starcz mora no Panner; saem os presets de fabrica do Panner e entram os do Drop Starcz
+insert into log select 'preset de fabrica do Panner removido: ' || name from blocks where type = 'PANNER' and name in ('+DEFAULT','MACHINE','PING PONG','STEREO FAKE','VIBRO');
+delete from blocks where type = 'PANNER' and name in ('+DEFAULT','MACHINE','PING PONG','STEREO FAKE','VIBRO');
+create temp table dn(nm text, ct text);
+insert into dn values
+	('+ DROP 1','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":0.0},"Pan":{"type":0,"value":-100},"Rate":{"type":0,"value":0.1},"Shape":{"type":0,"value":50},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('+ DROP 2','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":9.091},"Pan":{"type":0,"value":-100},"Rate":{"type":0,"value":0.1},"Shape":{"type":0,"value":50},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('+ DROP 3','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":18.182},"Pan":{"type":0,"value":-100},"Rate":{"type":0,"value":0.1},"Shape":{"type":0,"value":50},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('+ DROP 4','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":27.273},"Pan":{"type":0,"value":-100},"Rate":{"type":0,"value":0.1},"Shape":{"type":0,"value":50},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('+ DROP 5','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":36.364},"Pan":{"type":0,"value":-100},"Rate":{"type":0,"value":0.1},"Shape":{"type":0,"value":50},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('+ DROP 7','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":54.545},"Pan":{"type":0,"value":-100},"Rate":{"type":0,"value":0.1},"Shape":{"type":0,"value":50},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('+ OITAVA ABAIXO','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":100.0},"Pan":{"type":0,"value":-40},"Rate":{"type":0,"value":0.3},"Shape":{"type":0,"value":50},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('DJENT -2','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":9.091},"Pan":{"type":0,"value":20},"Rate":{"type":0,"value":1.1},"Shape":{"type":0,"value":70},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('DJENT -4','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":27.273},"Pan":{"type":0,"value":20},"Rate":{"type":0,"value":1.1},"Shape":{"type":0,"value":70},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('DJENT -5','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":36.364},"Pan":{"type":0,"value":20},"Rate":{"type":0,"value":1.1},"Shape":{"type":0,"value":70},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('INDUSTRIAL -4','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":27.273},"Pan":{"type":0,"value":60},"Rate":{"type":0,"value":0.4},"Shape":{"type":0,"value":100},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('TCHUG MAX -4','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":27.273},"Pan":{"type":0,"value":100},"Rate":{"type":0,"value":2.9},"Shape":{"type":0,"value":60},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('SUB PESADO -4','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":27.273},"Pan":{"type":0,"value":-60},"Rate":{"type":0,"value":0.1},"Shape":{"type":0,"value":30},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}'),
+	('PALHETA SECA -4','{"data":{"Panner":{"childorder":["Sync","Pan","Delay","Rate","Shape","Depth"],"children":{"Delay":{"type":0,"value":0},"Depth":{"type":0,"value":27.273},"Pan":{"type":0,"value":-10},"Rate":{"type":0,"value":5.9},"Shape":{"type":0,"value":85},"Sync":{"state":false,"type":1}}}},"info":{"version":"1.0.9"}}');
+insert into log select 'novo preset do Drop Starcz: ' || nm from dn where nm not in (select name from blocks where type = 'PANNER');
+insert into blocks (id, type, name, content, is_readonly)
+	select lower(hex(randomblob(4)) || '-' || hex(randomblob(2)) || '-4' || substr(hex(randomblob(2)), 2) || '-a'
+		|| substr(hex(randomblob(2)), 2) || '-' || hex(randomblob(6))), 'PANNER', nm, ct, 0
+	from dn where nm not in (select name from blocks where type = 'PANNER');
 commit;
 select m from log;
 select (select count(*) from want) || ' modelos, ' || (select count(*) from log) || ' linhas de alteracao';

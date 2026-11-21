@@ -1,6 +1,6 @@
 """MX5 NAM A2 - instalador.
 
-Monta, no seu computador, o firmware MX5 NAM A2 v8 (NAM A2 Pro no 8-Bit Crush) a partir do atualizador OFICIAL da HeadRush 2.7.
+Monta, no seu computador, o firmware MX5 NAM A2 v9.1 (NAM A2 Pro, Drop Starcz, IR longo) a partir do atualizador OFICIAL da HeadRush 2.7.
 Uso: de dois cliques no instalador (baixa o atualizador oficial do site da inMusic) ou arraste o
 atualizador oficial (.exe/.zip) que voce ja tem para cima dele.
 
@@ -14,7 +14,7 @@ BASE = os.path.dirname(os.path.abspath(sys.executable)) if FROZEN else os.path.d
 sys.path.insert(0, os.path.join(HERE, 'bridge'))
 import patcher, ext4, fitpatch, xzblocks, bridgepatch   # do MX5 Bridge 0.7 (TicT4x, licenca MIT)
 
-VERSAO = 'v8'
+VERSAO = 'v9.1'
 PAYLOAD = os.path.join(HERE, 'payload')
 SAIDA = 'MX5_NAM_A2_%s_%s_PRONTO_PARA_GRAVAR'
 MAGIC_CORE, MAGIC_ART = b'MX5NAMCORE1\0', b'MX5NAMARTE1\0'
